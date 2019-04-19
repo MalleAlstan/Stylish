@@ -1,4 +1,4 @@
-package com.cas.stylish
+package com.john.stylish
 
 import org.junit.Test
 

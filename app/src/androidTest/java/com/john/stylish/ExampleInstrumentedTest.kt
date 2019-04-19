@@ -1,4 +1,4 @@
-package com.cas.stylish
+package com.john.stylish
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

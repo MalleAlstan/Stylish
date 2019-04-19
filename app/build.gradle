@@ -26,7 +26,6 @@ def supportVersion = '27.1.1'
 def retrofitVersion = '2.3.0'
 def rxJavaVersion = '2.0.1'
 def butterKnifeVersion = '8.8.1'
-def daggerVersion = '2.13'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -49,10 +48,4 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     implementation "com.android.support:support-v4:$supportVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
-
 }
