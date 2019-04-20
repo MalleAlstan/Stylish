@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_fa"
+        android:fitsSystemWindows="false"
+        tools:context="com.john.stylish.ui.MainActivity">
 
-</layout>
+    <ImageView
+            android:id="@+id/app_toolbar"
+            android:background="@color/white_fa"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="5dp"/>
+
+    <ImageView
+            android:id="@+id/app_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@+id/app_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/app_title"
+            app:layout_constraintBottom_toBottomOf="@+id/app_title"
+            android:elevation="40dp"
+            android:background="@drawable/ic_menu_black_24dp"/>
+
+    <TextView
+            android:id="@+id/app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STYLiSH"
+            android:textColor="@color/black_00"
+            android:textSize="30dp"
+            android:elevation="40dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/app_toolbar"/>
+</android.support.constraint.ConstraintLayout>
