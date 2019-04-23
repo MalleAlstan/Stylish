@@ -41,7 +41,7 @@
                 android:id="@+id/app_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@{String.valueOf(MainViewModel.currentTitle)}"
+                tools:text="@{String.valueOf(MainViewModel.fragType.getTitle())}"
                 android:textColor="@color/black_00"
                 android:textSize="30dp"
                 android:elevation="40dp"
@@ -50,15 +50,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/app_toolbar"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="50dp"
-                      app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintEnd_toEndOf="parent" android:id="@+id/linearLayout2">
+        <FrameLayout
+                android:id="@+id/frame_frag_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/linear_nav_buttons"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp">
 
+        </FrameLayout>
+
+        <LinearLayout
+                android:id="@+id/linear_nav_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:elevation="20dp">
 
@@ -93,7 +108,7 @@
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:elevation="20dp">
 
@@ -128,7 +143,7 @@
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:elevation="20dp">
 
@@ -163,7 +178,7 @@
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:elevation="20dp">
 

@@ -1,27 +1,33 @@
 package com.john.stylish.ui
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
-import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.View
 import android.view.View.OnClickListener
-import android.view.WindowManager
 import com.john.stylish.R
 import com.john.stylish.base.BaseActivity
 import com.john.stylish.base.BaseInit
 import com.john.stylish.databinding.ActivityMainBinding
-import com.john.stylish.utils.Constants.Companion.APP_NAME
-import com.john.stylish.utils.Constants.Companion.FRAG_CART
-import com.john.stylish.utils.Constants.Companion.FRAG_CATEGORY
-import com.john.stylish.utils.Constants.Companion.FRAG_HOME
-import com.john.stylish.utils.Constants.Companion.FRAG_PROFILE
+import com.john.stylish.ui.cart.FragCart
+import com.john.stylish.ui.category.FragCategory
+import com.john.stylish.ui.home.FragHome
+import com.john.stylish.ui.profile.FragProfile
 import kotlinx.android.synthetic.main.activity_main.*
+import com.john.stylish.utils.Constants.Companion.FRAG_HOME as FRAG_HOME1
 
-class MainActivity : BaseActivity(), BaseInit, OnClickListener{
+class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     lateinit var mMainViewModel: MainViewModel
     lateinit var mMainBinding: ActivityMainBinding
+    lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
+
+    var mFragHome = FragHome()
+    var mFragCategory = FragCategory()
+    var mFragCart = FragCart()
+    var mFragProfile = FragProfile()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +35,29 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener{
         init()
     }
 
-    override fun init(){
+    override fun init() {
         setTransparentStatusBar()
         setDataBinding()
-        setToolbarPadding()
+        setToolbarPadding(app_toolbar)
         setOnClickListeners()
+        setObservers()
     }
 
-    private fun setDataBinding(){
+    private fun setDataBinding() {
         mMainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         mMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         mMainBinding.mainViewModel = mMainViewModel
         mMainBinding.setLifecycleOwner(this)
     }
 
-    private fun setOnClickListeners(){
+    private fun setObservers() {
+        mFragmentObserver = Observer { newFragment ->
+           showFragment(newFragment)
+        }
+        mMainViewModel.fragType.observe(this, mFragmentObserver)
+    }
+
+    private fun setOnClickListeners() {
         btn_nav_home.setOnClickListener(this)
         btn_nav_category.setOnClickListener(this)
         btn_nav_cart.setOnClickListener(this)
@@ -51,35 +65,30 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener{
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btn_nav_home -> setFragView(APP_NAME)
-            R.id.btn_nav_category -> setFragView(FRAG_CATEGORY)
-            R.id.btn_nav_cart -> setFragView(FRAG_CART)
-            R.id.btn_nav_profile -> setFragView(FRAG_PROFILE)
+        when (v?.id) {
+            R.id.btn_nav_home -> setFragType(MainViewModel.FRAG_TYPE.HOME)
+            R.id.btn_nav_category -> setFragType(MainViewModel.FRAG_TYPE.CATEGORY)
+            R.id.btn_nav_cart -> setFragType(MainViewModel.FRAG_TYPE.CART)
+            R.id.btn_nav_profile -> setFragType(MainViewModel.FRAG_TYPE.PROFILE)
         }
     }
 
-    private fun setFragView(fragType: String){
-        mMainViewModel.currentTitle.value = fragType
+    private fun setFragType(fragType: MainViewModel.FRAG_TYPE) {
+        mMainViewModel.fragType.value = fragType
     }
 
-    private fun setTransparentStatusBar() {
-        val window = window
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.TRANSPARENT
-    }
+    private fun showFragment(fragType: MainViewModel.FRAG_TYPE?) {
+        var fragment: Fragment? = null
+        when (fragType) {
+            MainViewModel.FRAG_TYPE.HOME -> fragment = mFragHome
+            MainViewModel.FRAG_TYPE.CATEGORY -> fragment = mFragCategory
+            MainViewModel.FRAG_TYPE.CART -> fragment = mFragCart
+            MainViewModel.FRAG_TYPE.PROFILE -> fragment = mFragProfile
+        }
 
-    private fun setToolbarPadding() {
-        app_toolbar.setPadding(0, getStatusBarHeight(), 0, 0)
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frame_frag_container, fragment).commit()
+        }
     }
-
-    private fun getStatusBarHeight(): Int {
-        var result = 0
-        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) result = resources.getDimensionPixelSize(resourceId)
-        return result
-    }
-
 }
