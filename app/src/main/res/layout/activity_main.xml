@@ -1,191 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_fa"
-        android:fitsSystemWindows="false"
-        tools:context="com.john.stylish.ui.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-            android:id="@+id/app_toolbar"
-            android:background="@color/white_fa"
+    <data>
+        <variable
+                name="MainViewModel"
+                type="com.john.stylish.ui.MainViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:elevation="5dp"/>
+            android:layout_height="match_parent"
+            android:background="@color/white_fa"
+            android:fitsSystemWindows="false"
+            tools:context="com.john.stylish.ui.MainActivity">
 
-    <ImageView
-            android:id="@+id/app_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toStartOf="@+id/app_toolbar"
-            app:layout_constraintTop_toTopOf="@+id/app_title"
-            app:layout_constraintBottom_toBottomOf="@+id/app_title"
-            android:elevation="40dp"
-            android:background="@drawable/ic_app_menu"/>
+        <ImageView
+                android:id="@+id/app_toolbar"
+                android:background="@color/white_fa"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="5dp"/>
 
-    <TextView
-            android:id="@+id/app_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="STYLiSH"
-            android:textColor="@color/black_00"
-            android:textSize="30dp"
-            android:elevation="40dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/app_toolbar"/>
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="50dp"
-                  app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent">
-
-
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="0dp"
+        <ImageView
+                android:id="@+id/app_menu"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="20dp">
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="@+id/app_toolbar"
+                app:layout_constraintTop_toTopOf="@+id/app_title"
+                app:layout_constraintBottom_toBottomOf="@+id/app_title"
+                android:elevation="40dp"
+                android:background="@drawable/ic_app_menu"/>
 
-            <Button
-                    android:id="@+id/btn_nav_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_nav_button"/>
-
-            <ImageView
-                    android:id="@+id/img_nav_home_normal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_home_normal"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <ImageView
-                    android:id="@+id/img_nav_home_selected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_home_selected"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>?
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="0dp"
+        <TextView
+                android:id="@+id/app_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="20dp">
+                tools:text="@{String.valueOf(MainViewModel.currentTitle)}"
+                android:textColor="@color/black_00"
+                android:textSize="30dp"
+                android:elevation="40dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/app_toolbar"/>
 
-            <Button
-                    android:id="@+id/btn_nav_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_nav_button"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintEnd_toEndOf="parent" android:id="@+id/linearLayout2">
 
-            <ImageView
-                    android:id="@+id/img_nav_category_normal"
-                    android:layout_width="wrap_content"
+
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_category_normal"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_weight="1"
+                    android:elevation="20dp">
 
-            <ImageView
-                    android:id="@+id/img_nav_category_selected"
-                    android:layout_width="wrap_content"
+                <Button
+                        android:id="@+id/btn_nav_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"/>
+
+                <ImageView
+                        android:id="@+id/img_nav_home_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_home_normal"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                        android:id="@+id/img_nav_home_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_home_selected"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>?
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_category_selected"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>?
-        </android.support.constraint.ConstraintLayout>
+                    android:layout_weight="1"
+                    android:elevation="20dp">
 
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="20dp">
+                <Button
+                        android:id="@+id/btn_nav_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"/>
 
-            <Button
-                    android:id="@+id/btn_nav_cart"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_nav_button"/>
+                <ImageView
+                        android:id="@+id/img_nav_category_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_category_normal"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                    android:id="@+id/img_nav_cart_normal"
-                    android:layout_width="wrap_content"
+                <ImageView
+                        android:id="@+id/img_nav_category_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_category_selected"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>?
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_cart_normal"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_weight="1"
+                    android:elevation="20dp">
 
-            <ImageView
-                    android:id="@+id/img_nav_cart_selected"
-                    android:layout_width="wrap_content"
+                <Button
+                        android:id="@+id/btn_nav_cart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"/>
+
+                <ImageView
+                        android:id="@+id/img_nav_cart_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_cart_normal"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                        android:id="@+id/img_nav_cart_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_cart_selected"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>?
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_cart_selected"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>?
-        </android.support.constraint.ConstraintLayout>
+                    android:layout_weight="1"
+                    android:elevation="20dp">
 
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="20dp">
+                <Button
+                        android:id="@+id/btn_nav_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"/>
 
-            <Button
-                    android:id="@+id/btn_nav_profile"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_nav_button"/>
+                <ImageView
+                        android:id="@+id/img_nav_profile_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_profile_normal"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                    android:id="@+id/img_nav_profile_normal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_profile_normal"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <ImageView
-                    android:id="@+id/img_nav_profile_selected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_profile_selected"
-                    android:elevation="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>?
-        </android.support.constraint.ConstraintLayout>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+                <ImageView
+                        android:id="@+id/img_nav_profile_selected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_profile_selected"
+                        android:elevation="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>?
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>
