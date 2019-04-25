@@ -31,7 +31,7 @@ class FragHome: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        getHotsList()
+        mFragHomeViewModel.getHotsList()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -43,23 +43,8 @@ class FragHome: Fragment(){
         return mFragHomeBinding.root
     }
 
-    private fun getHotsList(){
-        val getHotsListCall = ApiServiceBuilder.build().getMarketingHots()
-        mHotsListDisposable = getHotsListCall.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { hotsResponse -> showHotsResponse(hotsResponse)},
-                { error -> Log.d(TAG, error.toString())}
-            )
-    }
-
-    private fun showHotsResponse(hotsResponse: HotsResponse){
-       mFragHomeViewModel.setTitle(hotsResponse)
-    }
-
     override fun onPause() {
         super.onPause()
-        mHotsListDisposable?.dispose()
+        mHotsListDisposable.dispose()
     }
-
 }
