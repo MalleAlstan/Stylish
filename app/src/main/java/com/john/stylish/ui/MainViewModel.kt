@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.john.stylish.utils.Constants.Companion.APP_NAME
 import com.john.stylish.utils.Constants.Companion.CART_TITLE
-import com.john.stylish.utils.Constants.Companion.CATEGORY_TITLE
+import com.john.stylish.utils.Constants.Companion.CATALOG_TITLE
 import com.john.stylish.utils.Constants.Companion.PROFILE_TITLE
 import com.john.stylish.ui.MainViewModel.FRAG_TYPE as FRAG_TYPE1
 
@@ -13,9 +13,13 @@ class MainViewModel: ViewModel(){
 
     var fragType = MutableLiveData<FRAG_TYPE>()
 
+    init {
+        fragType.value = FRAG_TYPE.HOME
+    }
+
     enum class FRAG_TYPE{
         HOME,
-        CATEGORY,
+        CATALOG,
         CART,
         PROFILE;
 
@@ -23,15 +27,27 @@ class MainViewModel: ViewModel(){
             var title = APP_NAME
             when(this){
                 HOME -> title = APP_NAME
-                CATEGORY -> title = CATEGORY_TITLE
+                CATALOG -> title = CATALOG_TITLE
                 CART -> title = CART_TITLE
                 PROFILE -> title = PROFILE_TITLE
             }
             return title
         }
-    }
 
-    init {
-        fragType.value = FRAG_TYPE.HOME
+        fun getHomeVisibility(): Boolean{
+            return this == HOME
+        }
+
+        fun getCatalogVisibility(): Boolean{
+            return this == CATALOG
+        }
+
+        fun getCartVisibility(): Boolean{
+            return this == CART
+        }
+
+        fun getProfileVisibility(): Boolean{
+            return this == PROFILE
+        }
     }
 }

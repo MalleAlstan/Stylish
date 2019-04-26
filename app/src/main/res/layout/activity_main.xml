@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
                 name="MainViewModel"
                 type="com.john.stylish.ui.MainViewModel"/>
@@ -14,6 +15,7 @@
             android:layout_height="match_parent"
             android:background="@color/white_fa"
             android:fitsSystemWindows="false"
+            android:clipToPadding="false"
             tools:context="com.john.stylish.ui.MainActivity">
 
         <ImageView
@@ -34,7 +36,7 @@
                 app:layout_constraintStart_toStartOf="@+id/app_toolbar"
                 app:layout_constraintTop_toTopOf="@+id/app_title"
                 app:layout_constraintBottom_toBottomOf="@+id/app_title"
-                android:elevation="40dp"
+                android:elevation="10dp"
                 android:background="@drawable/ic_app_menu"/>
 
         <TextView
@@ -44,7 +46,7 @@
                 tools:text="@{String.valueOf(MainViewModel.fragType.getTitle())}"
                 android:textColor="@color/black_00"
                 android:textSize="30dp"
-                android:elevation="40dp"
+                android:elevation="10dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,12 +56,11 @@
                 android:id="@+id/frame_frag_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:padding="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/app_toolbar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/linear_nav_buttons"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp">
+                app:layout_constraintBottom_toTopOf="@+id/linear_nav_buttons">
 
         </FrameLayout>
 
@@ -67,6 +68,9 @@
                 android:id="@+id/linear_nav_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:clipToPadding="false"
+                android:elevation="20dp"
+                android:background="@color/white_fa"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -74,8 +78,7 @@
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:elevation="20dp">
+                    android:layout_weight="1">
 
                 <Button
                         android:id="@+id/btn_nav_home"
@@ -88,7 +91,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_home_normal"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getHomeVisibility()? View.GONE : View.VISIBLE, default=gone}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +103,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_home_selected"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getHomeVisibility()? View.VISIBLE : View.GONE, default=visible}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -109,32 +114,33 @@
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:elevation="20dp">
+                    android:layout_weight="1">
 
                 <Button
-                        android:id="@+id/btn_nav_category"
+                        android:id="@+id/btn_nav_catalog"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_nav_button"/>
 
                 <ImageView
-                        android:id="@+id/img_nav_category_normal"
+                        android:id="@+id/img_nav_catalog_normal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_category_normal"
-                        android:elevation="20dp"
+                        android:background="@drawable/ic_catalog_normal"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getCatalogVisibility()? View.GONE : View.VISIBLE, default=visible}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
                 <ImageView
-                        android:id="@+id/img_nav_category_selected"
+                        android:id="@+id/img_nav_catalog_selected"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_category_selected"
-                        android:elevation="20dp"
+                        android:background="@drawable/ic_catalog_selected"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getCatalogVisibility()? View.VISIBLE : View.GONE, default=gone}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -144,8 +150,7 @@
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:elevation="20dp">
+                    android:layout_weight="1">
 
                 <Button
                         android:id="@+id/btn_nav_cart"
@@ -158,7 +163,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_cart_normal"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getCartVisibility()? View.GONE : View.VISIBLE, default=visible}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +175,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_cart_selected"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getCartVisibility()? View.VISIBLE : View.GONE, default=gone}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -179,8 +186,7 @@
             <android.support.constraint.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:elevation="20dp">
+                    android:layout_weight="1">
 
                 <Button
                         android:id="@+id/btn_nav_profile"
@@ -193,7 +199,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_profile_normal"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getProfileVisibility()? View.GONE : View.VISIBLE, default=visible}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +211,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_profile_selected"
-                        android:elevation="20dp"
+                        android:elevation="10dp"
+                        android:visibility="@{MainViewModel.fragType.getProfileVisibility()? View.VISIBLE : View.GONE, default=gone}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

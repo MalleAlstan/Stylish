@@ -12,7 +12,7 @@ import com.john.stylish.base.BaseActivity
 import com.john.stylish.base.BaseInit
 import com.john.stylish.databinding.ActivityMainBinding
 import com.john.stylish.ui.cart.FragCart
-import com.john.stylish.ui.category.FragCategory
+import com.john.stylish.ui.catelog.FragCatalog
 import com.john.stylish.ui.home.FragHome
 import com.john.stylish.ui.profile.FragProfile
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,7 +25,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
 
     var mFragHome = FragHome()
-    var mFragCategory = FragCategory()
+    var mFragCatalog = FragCatalog()
     var mFragCart = FragCart()
     var mFragProfile = FragProfile()
 
@@ -59,7 +59,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     private fun setOnClickListeners() {
         btn_nav_home.setOnClickListener(this)
-        btn_nav_category.setOnClickListener(this)
+        btn_nav_catalog.setOnClickListener(this)
         btn_nav_cart.setOnClickListener(this)
         btn_nav_profile.setOnClickListener(this)
     }
@@ -67,7 +67,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_nav_home -> setFragType(MainViewModel.FRAG_TYPE.HOME)
-            R.id.btn_nav_category -> setFragType(MainViewModel.FRAG_TYPE.CATEGORY)
+            R.id.btn_nav_catalog -> setFragType(MainViewModel.FRAG_TYPE.CATALOG)
             R.id.btn_nav_cart -> setFragType(MainViewModel.FRAG_TYPE.CART)
             R.id.btn_nav_profile -> setFragType(MainViewModel.FRAG_TYPE.PROFILE)
         }
@@ -81,7 +81,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         var fragment: Fragment? = null
         when (fragType) {
             MainViewModel.FRAG_TYPE.HOME -> fragment = mFragHome
-            MainViewModel.FRAG_TYPE.CATEGORY -> fragment = mFragCategory
+            MainViewModel.FRAG_TYPE.CATALOG -> fragment = mFragCatalog
             MainViewModel.FRAG_TYPE.CART -> fragment = mFragCart
             MainViewModel.FRAG_TYPE.PROFILE -> fragment = mFragProfile
         }

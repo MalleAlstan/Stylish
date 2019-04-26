@@ -31,7 +31,7 @@ class FragHome: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mFragHomeViewModel.getHotsList()
+        mHotsListDisposable = mFragHomeViewModel.getHotsList()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {

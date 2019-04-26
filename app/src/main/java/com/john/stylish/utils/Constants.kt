@@ -8,7 +8,7 @@ class Constants {
         const val STYLISH_BASE_URL = "https://api.appworks-school.tw/api/1.0"
 
         const val FRAG_HOME = "HOME"
-        const val CATEGORY_TITLE = "CATEGORY"
+        const val CATALOG_TITLE = "CATALOG"
         const val CART_TITLE = "CART"
         const val PROFILE_TITLE = "PROFILE"
     }
