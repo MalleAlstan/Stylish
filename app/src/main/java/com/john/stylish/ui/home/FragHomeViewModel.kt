@@ -3,13 +3,15 @@ package com.john.stylish.ui.home
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import com.john.stylish.model.objects.Hots
+import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.model.responses.HotsResponse
 import com.john.stylish.network.ApiServiceBuilder
 import com.john.stylish.utils.Constants
-import com.john.stylish.utils.Constants.Companion.APP_NAME
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.util.ArrayList
 
 class FragHomeViewModel : ViewModel() {
 
@@ -27,7 +29,7 @@ class FragHomeViewModel : ViewModel() {
         val disposable = getHotsListCall.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { hotsResponse -> setTitle(hotsResponse)
+                { hotsResponse -> setHotsList(hotsResponse)
                     isLoading.value = false
                 },
                 { error -> Log.d(Constants.TAG, error.toString())
@@ -37,28 +39,23 @@ class FragHomeViewModel : ViewModel() {
         return disposable
     }
 
-    private fun setTitle(hotsResponse: HotsResponse){
-        var hotsList = " "
-
-        for (hots in hotsResponse.data){
-            hotsList = hotsList + "< " + hots.title + " >" + "\n\n"
-            var i = 0
-            for (product in hots.products){
-                i = i + 1
-                hotsList = hotsList + i + ". "+ product.title +  " - " + product.price + "$ \n"
-                hotsList = hotsList + product.description + "\n"
-                hotsList = hotsList + "" + product.wash + "\n"
-                for (color in product.colors){
-                    hotsList = hotsList + color.name + "(" + color.code + ") "
-                }
-                hotsList = hotsList + "\n" + "Varients: \n"
-                for (varients in product.variants){
-                    hotsList = hotsList + varients.color_code + "(" + varients.size + ")x" + varients.stock + " "
-                }
-                hotsList = hotsList + "\n\n"
+    private fun setHotsList(hotsResponse: HotsResponse){
+        var combinedResults = combineHotsList(hotsResponse.data)
+        for (any in combinedResults){
+            if (any is String){
+                mTitle.value = mTitle.value + "####" + any.toString() + "####\n\n"
+            } else {
+                var product = any as Product
+                mTitle.value = mTitle.value + product.title + "-" + product.price + "$\n" + product.description + "\n\n"
             }
-            hotsList = hotsList + "\n"
         }
-        mTitle.value = hotsList
+    }
+
+    private fun combineHotsList(hotsList: ArrayList<Hots>): ArrayList<Any> {
+        val combineList = ArrayList<Any>()
+        hotsList.forEach {
+            combineList.addAll(it.toObjList())
+        }
+        return combineList
     }
 }

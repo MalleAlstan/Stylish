@@ -6,5 +6,5 @@ import com.john.stylish.model.objects.Product.Product
 
 data class HotsResponse(
     @SerializedName("data")
-    val data: Array<Hots>
+    val data: ArrayList<Hots>
 )
