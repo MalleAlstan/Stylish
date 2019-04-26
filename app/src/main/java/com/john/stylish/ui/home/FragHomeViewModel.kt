@@ -12,19 +12,27 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class FragHomeViewModel : ViewModel() {
+
     var mTitle = MutableLiveData<String>()
+    var isLoading = MutableLiveData<Boolean>()
 
     init {
-        mTitle.value = "Loading..."
+        mTitle.value = ""
+        isLoading.value = false
     }
 
     fun getHotsList(): Disposable{
+        isLoading.value = true
         val getHotsListCall = ApiServiceBuilder.build().getMarketingHots()
         val disposable = getHotsListCall.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { hotsResponse -> setTitle(hotsResponse)},
-                { error -> Log.d(Constants.TAG, error.toString())}
+                { hotsResponse -> setTitle(hotsResponse)
+                    isLoading.value = false
+                },
+                { error -> Log.d(Constants.TAG, error.toString())
+                    isLoading.value = false
+                }
             )
         return disposable
     }

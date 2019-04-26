@@ -68,7 +68,6 @@
                 android:id="@+id/linear_nav_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:clipToPadding="false"
                 android:elevation="20dp"
                 android:background="@color/white_fa"
                 app:layout_constraintBottom_toBottomOf="parent"

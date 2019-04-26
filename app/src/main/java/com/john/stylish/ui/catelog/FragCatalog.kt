@@ -10,7 +10,7 @@ import com.john.stylish.R
 class FragCatalog: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var root = inflater.inflate(R.layout.frag_category, container, false);
+        var root = inflater.inflate(R.layout.frag_catalog, container, false);
 
         return root
     }
