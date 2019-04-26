@@ -2,10 +2,10 @@ package com.john.stylish.ui
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.john.stylish.utils.Constants.Companion.APP_NAME
-import com.john.stylish.utils.Constants.Companion.CART_TITLE
-import com.john.stylish.utils.Constants.Companion.CATALOG_TITLE
-import com.john.stylish.utils.Constants.Companion.PROFILE_TITLE
+import com.john.stylish.utils.Constants.APP_NAME
+import com.john.stylish.utils.Constants.CART_TITLE
+import com.john.stylish.utils.Constants.CATALOG_TITLE
+import com.john.stylish.utils.Constants.PROFILE_TITLE
 import com.john.stylish.ui.MainViewModel.FRAG_TYPE as FRAG_TYPE1
 
 

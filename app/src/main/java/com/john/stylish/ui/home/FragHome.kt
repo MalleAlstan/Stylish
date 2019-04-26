@@ -1,28 +1,26 @@
 package com.john.stylish.ui.home
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
 import com.john.stylish.databinding.FragHomeBinding
-import com.john.stylish.model.responses.HotsResponse
-import com.john.stylish.network.ApiServiceBuilder
-import com.john.stylish.utils.Constants.Companion.TAG
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-
+import kotlinx.android.synthetic.main.frag_home.*
 
 class FragHome: Fragment(){
 
     lateinit var mFragHomeViewModel: FragHomeViewModel
     lateinit var mFragHomeBinding: FragHomeBinding
     lateinit var mHotsListDisposable: Disposable
+    lateinit var mHotsListObserver: Observer<ArrayList<Any>>
+    lateinit var mHotsListAdapter: HotsListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return setDataBinding(inflater, container)
@@ -31,7 +29,21 @@ class FragHome: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setObservers()
+        showHotListsView()
+    }
+
+    private fun showHotListsView(){
+        recyclerView_hot_list.layoutManager = LinearLayoutManager(context)
         mHotsListDisposable = mFragHomeViewModel.getHotsList()
+    }
+
+    private fun setObservers() {
+        mHotsListObserver = Observer { newFragment ->
+            mHotsListAdapter = HotsListAdapter(newFragment!!, activity!!)
+            recyclerView_hot_list.adapter = mHotsListAdapter
+        }
+        mFragHomeViewModel.mHotsList.observe(this, mHotsListObserver)
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {

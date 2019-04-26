@@ -29,7 +29,7 @@ data class Product(
     @SerializedName("variants")
     val variants: Array<Variant>,
     @SerializedName("main_images")
-    val main_image:Array<String>,
+    val main_image: String,
     @SerializedName("images")
     val images: Array<String>
 )

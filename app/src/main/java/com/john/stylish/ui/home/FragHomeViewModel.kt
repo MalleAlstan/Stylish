@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.john.stylish.model.objects.Hots
-import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.model.responses.HotsResponse
 import com.john.stylish.network.ApiServiceBuilder
 import com.john.stylish.utils.Constants
@@ -17,6 +16,7 @@ class FragHomeViewModel : ViewModel() {
 
     var mTitle = MutableLiveData<String>()
     var isLoading = MutableLiveData<Boolean>()
+    var mHotsList= MutableLiveData<ArrayList<Any>>()
 
     init {
         mTitle.value = ""
@@ -40,15 +40,17 @@ class FragHomeViewModel : ViewModel() {
     }
 
     private fun setHotsList(hotsResponse: HotsResponse){
-        var combinedResults = combineHotsList(hotsResponse.data)
-        for (any in combinedResults){
-            if (any is String){
-                mTitle.value = mTitle.value + "####" + any.toString() + "####\n\n"
-            } else {
-                var product = any as Product
-                mTitle.value = mTitle.value + product.title + "-" + product.price + "$\n" + product.description + "\n\n"
-            }
-        }
+        mHotsList.value = combineHotsList(hotsResponse.data)
+//        for (any in combinedResults){
+//            if (any is String){
+//                mTitle.value = mTitle.value + "####" + any.toString() + "####\n\n"
+//            } else {
+//                var product = any as Product
+//                mTitle.value = mTitle.value + product.title + "-" + product.price + "$\n" + product.description + "\n\n"
+//            }
+//        }
+
+        mTitle.value = mHotsList.value.toString()
     }
 
     private fun combineHotsList(hotsList: ArrayList<Hots>): ArrayList<Any> {

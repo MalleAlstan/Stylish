@@ -16,7 +16,6 @@ import com.john.stylish.ui.catelog.FragCatalog
 import com.john.stylish.ui.home.FragHome
 import com.john.stylish.ui.profile.FragProfile
 import kotlinx.android.synthetic.main.activity_main.*
-import com.john.stylish.utils.Constants.Companion.FRAG_HOME as FRAG_HOME1
 
 class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
