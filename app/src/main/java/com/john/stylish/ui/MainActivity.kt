@@ -39,7 +39,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         setDataBinding()
         setToolbarPadding(app_toolbar)
         setOnClickListeners()
-        setObservers()
+        setLiveDataObservers()
     }
 
     private fun setDataBinding() {
@@ -49,9 +49,9 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         mMainBinding.setLifecycleOwner(this)
     }
 
-    private fun setObservers() {
-        mFragmentObserver = Observer { newFragment ->
-           showFragment(newFragment)
+    private fun setLiveDataObservers() {
+        mFragmentObserver = Observer { newFragType ->
+           showFragment(newFragType)
         }
         mMainViewModel.fragType.observe(this, mFragmentObserver)
     }

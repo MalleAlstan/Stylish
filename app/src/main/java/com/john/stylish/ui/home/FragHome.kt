@@ -29,7 +29,7 @@ class FragHome: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setObservers()
+        setLiveDataObservers()
         showHotListsView()
     }
 
@@ -38,7 +38,7 @@ class FragHome: Fragment(){
         mHotsListDisposable = mFragHomeViewModel.getHotsList()
     }
 
-    private fun setObservers() {
+    private fun setLiveDataObservers() {
         mHotsListObserver = Observer { newFragment ->
             mHotsListAdapter = HotsListAdapter(newFragment!!, activity!!)
             recyclerView_hot_list.adapter = mHotsListAdapter
