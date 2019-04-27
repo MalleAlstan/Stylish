@@ -65,19 +65,16 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_nav_home -> setFragType(MainViewModel.FRAG_TYPE.HOME)
-            R.id.btn_nav_catalog -> setFragType(MainViewModel.FRAG_TYPE.CATALOG)
-            R.id.btn_nav_cart -> setFragType(MainViewModel.FRAG_TYPE.CART)
-            R.id.btn_nav_profile -> setFragType(MainViewModel.FRAG_TYPE.PROFILE)
+            R.id.btn_nav_home -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.HOME
+            R.id.btn_nav_catalog -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.CATALOG
+            R.id.btn_nav_cart -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.CART
+            R.id.btn_nav_profile -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.PROFILE
         }
-    }
-
-    private fun setFragType(fragType: MainViewModel.FRAG_TYPE) {
-        mMainViewModel.fragType.value = fragType
     }
 
     private fun showFragment(fragType: MainViewModel.FRAG_TYPE?) {
         var fragment: Fragment? = null
+
         when (fragType) {
             MainViewModel.FRAG_TYPE.HOME -> fragment = mFragHome
             MainViewModel.FRAG_TYPE.CATALOG -> fragment = mFragCatalog

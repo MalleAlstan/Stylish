@@ -28,7 +28,7 @@ data class Product(
     val sizes: Array<String>,
     @SerializedName("variants")
     val variants: Array<Variant>,
-    @SerializedName("main_images")
+    @SerializedName("main_image")
     val main_image: String,
     @SerializedName("images")
     val images: Array<String>

@@ -8,15 +8,16 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.john.stylish.R
 import com.john.stylish.utils.ImageManager
 
 
-class HotsListAdapter(private val mHotsList: ArrayList<Any>, context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private val mInflator: LayoutInflater
 
     init {
-        this.mInflator = LayoutInflater.from(context)
+        this.mInflator = LayoutInflater.from(mContext)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -41,31 +42,23 @@ class HotsListAdapter(private val mHotsList: ArrayList<Any>, context: Context) :
     }
 
     private fun bindTitleViewHolder(holder: TitleViewHolder, title: String) {
-        // Set title
         holder.textTitle.text = title
     }
 
     private fun bindFullViewHolder(holder: FullViewHolder, product: Product) {
-        // Set main image
-//        ImageManager.setImageByUrl(holder.imageMain, product.main_image)
-        // Set title
+        Glide.with(mContext).load( if (product.main_image !=null ) product.main_image else "").into(holder.imageMain)
         holder.textTitle.text = product.title
-        // Set description
         holder.textDescription.text = product.description
     }
 
     private fun bindCollageViewHolder(holder: CollageViewHolder, product: Product) {
-        // Set left image
-        ImageManager.setImageByUrl(holder.imageLeft, if (product.images.size > 0) product.images[0] else product.main_image)
-        // Set top image
-        ImageManager.setImageByUrl(holder.imageTop, if (product.images.size > 1) product.images[1] else product.main_image)
-        // Set bottom image
-        ImageManager.setImageByUrl(holder.imageBottom, if (product.images.size > 2) product.images[2] else product.main_image)
-        // Set right image
-        ImageManager.setImageByUrl(holder.imageRight, if (product.images.size > 3) product.images[3] else product.main_image)
-        // Set title
+
+        Glide.with(mContext).load( if (product.images.size > 0) product.images[0] else product.main_image).into(holder.imageLeft)
+        Glide.with(mContext).load( if (product.images.size > 1) product.images[1] else product.main_image).into(holder.imageTop)
+        Glide.with(mContext).load( if (product.images.size > 2) product.images[2] else product.main_image).into(holder.imageBottom)
+        Glide.with(mContext).load( if (product.images.size > 3) product.images[3] else product.main_image).into(holder.imageRight)
+
         holder.textTitle.text = product.title
-        // Set description
         holder.textDescription.text = product.description
     }
 

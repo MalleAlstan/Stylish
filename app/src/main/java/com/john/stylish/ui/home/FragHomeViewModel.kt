@@ -14,12 +14,10 @@ import java.util.ArrayList
 
 class FragHomeViewModel : ViewModel() {
 
-    var mTitle = MutableLiveData<String>()
     var isLoading = MutableLiveData<Boolean>()
     var mHotsList= MutableLiveData<ArrayList<Any>>()
 
     init {
-        mTitle.value = ""
         isLoading.value = false
     }
 
@@ -41,16 +39,6 @@ class FragHomeViewModel : ViewModel() {
 
     private fun setHotsList(hotsResponse: HotsResponse){
         mHotsList.value = combineHotsList(hotsResponse.data)
-//        for (any in combinedResults){
-//            if (any is String){
-//                mTitle.value = mTitle.value + "####" + any.toString() + "####\n\n"
-//            } else {
-//                var product = any as Product
-//                mTitle.value = mTitle.value + product.title + "-" + product.price + "$\n" + product.description + "\n\n"
-//            }
-//        }
-
-        mTitle.value = mHotsList.value.toString()
     }
 
     private fun combineHotsList(hotsList: ArrayList<Hots>): ArrayList<Any> {
