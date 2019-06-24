@@ -1,21 +1,16 @@
 package com.john.stylish.ui.home
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
-import android.database.Observable
 import android.util.Log
+import com.john.stylish.model.Repository.ProductRepository
 import com.john.stylish.model.objects.Hots
-import com.john.stylish.model.responses.HotsResponse
-import com.john.stylish.network.ApiServiceBuilder
-import com.john.stylish.utils.Constants
+import com.john.stylish.network.responses.HotsResponse
 import com.john.stylish.utils.Constants.TAG
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.internal.util.HalfSerializer.onNext
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.rxkotlin.toObservable
-import io.reactivex.schedulers.Schedulers
 import java.util.*
 
 class FragHomeViewModel : ViewModel() {
@@ -30,15 +25,14 @@ class FragHomeViewModel : ViewModel() {
     fun getHotsList(): Disposable{
 
         isLoading.value = true
-        val getHotsListCall = ApiServiceBuilder.build().getMarketingHots()
 
-        val disposable = getHotsListCall
-            .subscribeOn(Schedulers.io())
+        val disposable = ProductRepository
+            .getProjectList()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = { setHotsList(it); isLoading.value = false },
+                onNext = { setHotsList(it) },
                 onError = { Log.d(TAG, it.toString()); isLoading.value = false },
-                onComplete = { Log.d(TAG, "Loading ok")}
+                onComplete = { Log.d(TAG, "Loading HotList ok"); isLoading.value = false}
             )
         return disposable
     }
@@ -54,7 +48,7 @@ class FragHomeViewModel : ViewModel() {
             .map { it.toObjList() }
             .map { combineList.addAll(it) }
             .subscribeBy(
-                onError = {Log.d(TAG,"error")}
+                onError = {Log.d(TAG,it.toString())}
             )
 
         return combineList

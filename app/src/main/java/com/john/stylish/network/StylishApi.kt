@@ -1,9 +1,8 @@
 package com.john.stylish.network
 
 import com.john.stylish.model.objects.Campaign
-import com.john.stylish.model.objects.Hots
 import com.john.stylish.model.objects.Product.Product
-import com.john.stylish.model.responses.HotsResponse
+import com.john.stylish.network.responses.HotsResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 
