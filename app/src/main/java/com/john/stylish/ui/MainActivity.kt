@@ -12,7 +12,7 @@ import com.john.stylish.base.BaseActivity
 import com.john.stylish.base.BaseInit
 import com.john.stylish.databinding.ActivityMainBinding
 import com.john.stylish.ui.cart.FragCart
-import com.john.stylish.ui.catelog.FragCatalog
+import com.john.stylish.ui.catalog.FragCatalog
 import com.john.stylish.ui.home.FragHome
 import com.john.stylish.ui.profile.FragProfile
 import kotlinx.android.synthetic.main.activity_main.*

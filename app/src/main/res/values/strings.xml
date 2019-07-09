@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Stylish</string>
+
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="others">Others</string>
 </resources>

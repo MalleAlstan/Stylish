@@ -27,7 +27,7 @@ class FragHomeViewModel : ViewModel() {
         isLoading.value = true
 
         val disposable = ProductRepository
-            .getProjectList()
+            .getHotsProductList()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = { setHotsList(it) },
@@ -48,7 +48,7 @@ class FragHomeViewModel : ViewModel() {
             .map { it.toObjList() }
             .map { combineList.addAll(it) }
             .subscribeBy(
-                onError = {Log.d(TAG,it.toString())}
+                onError = {Log.d(TAG, it.toString())}
             )
 
         return combineList
