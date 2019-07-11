@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.view.View
 import android.view.View.OnClickListener
 import com.john.stylish.R
@@ -23,10 +24,17 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     lateinit var mMainBinding: ActivityMainBinding
     lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
 
-    var mFragHome = FragHome()
-    var mFragCatalog = FragCatalog()
-    var mFragCart = FragCart()
-    var mFragProfile = FragProfile()
+    companion object {
+        lateinit var mFragHome: FragHome
+        lateinit var mFragCatalog: FragCatalog
+        lateinit var mFragCart: FragCart
+        lateinit var mFragProfile: FragProfile
+
+        fun isHomeInit() = :: mFragHome.isInitialized
+        fun isCatalogInit() = :: mFragCatalog.isInitialized
+        fun isCartInit() = :: mFragCart.isInitialized
+        fun isProfileInit() = :: mFragProfile.isInitialized
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +59,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     private fun setLiveDataObservers() {
         mFragmentObserver = Observer { newFragType ->
-           showFragment(newFragType)
+            transFragment(newFragType)
         }
         mMainViewModel.fragType.observe(this, mFragmentObserver)
     }
@@ -72,19 +80,59 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         }
     }
 
-    private fun showFragment(fragType: MainViewModel.FRAG_TYPE?) {
-        var fragment: Fragment? = null
+    private fun transFragment(fragType: MainViewModel.FRAG_TYPE?) {
+
+        val transaction = supportFragmentManager.beginTransaction()
 
         when (fragType) {
-            MainViewModel.FRAG_TYPE.HOME -> fragment = mFragHome
-            MainViewModel.FRAG_TYPE.CATALOG -> fragment = mFragCatalog
-            MainViewModel.FRAG_TYPE.CART -> fragment = mFragCart
-            MainViewModel.FRAG_TYPE.PROFILE -> fragment = mFragProfile
+            MainViewModel.FRAG_TYPE.HOME -> showFragHomeView(transaction)
+            MainViewModel.FRAG_TYPE.CATALOG -> showFragCatalogView(transaction)
+            MainViewModel.FRAG_TYPE.CART -> showFragCartView(transaction)
+            MainViewModel.FRAG_TYPE.PROFILE -> showFragProfileView(transaction)
         }
+    }
 
-        if (fragment != null) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.frame_frag_container, fragment).commit()
-        }
+    private fun showFragHomeView(transaction: FragmentTransaction){
+        if (!isHomeInit()) {
+            mFragHome = FragHome()
+            transaction.add(R.id.frame_frag_container, mFragHome)
+        } else transaction.show(mFragHome)
+        if (isCatalogInit()) transaction.hide(mFragCatalog)
+        if (isCartInit()) transaction.hide(mFragCart)
+        if (isProfileInit()) transaction.hide(mFragProfile)
+        transaction.commit()
+    }
+
+    private fun showFragCatalogView(transaction: FragmentTransaction){
+        if (!isCatalogInit()) {
+            mFragCatalog = FragCatalog()
+            transaction.add(R.id.frame_frag_container, mFragCatalog)
+        } else transaction.show(mFragCatalog)
+        if (isHomeInit()) transaction.hide(mFragHome)
+        if (isCartInit()) transaction.hide(mFragCart)
+        if (isProfileInit()) transaction.hide(mFragProfile)
+        transaction.commit()
+    }
+
+    private fun showFragCartView(transaction: FragmentTransaction){
+        if (!isCartInit()) {
+            mFragCart = FragCart()
+            transaction.add(R.id.frame_frag_container, mFragCart)
+        } else transaction.show(mFragCart)
+        if (isHomeInit()) transaction.hide(mFragHome)
+        if (isCatalogInit()) transaction.hide(mFragCatalog)
+        if (isProfileInit()) transaction.hide(mFragProfile)
+        transaction.commit()
+    }
+
+    private fun showFragProfileView(transaction: FragmentTransaction){
+        if (!isProfileInit()) {
+            mFragProfile = FragProfile()
+            transaction.add(R.id.frame_frag_container, mFragProfile)
+        } else transaction.show(mFragProfile)
+        if (isHomeInit()) transaction.hide(mFragHome)
+        if (isCatalogInit()) transaction.hide(mFragCatalog)
+        if (isCartInit()) transaction.hide(mFragCart)
+        transaction.commit()
     }
 }

@@ -26,16 +26,13 @@ class FragCatalog: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setLiveDataObservers()
         initCatalogView()
     }
 
     private fun initCatalogView(){
+        pager_catalog.offscreenPageLimit = 3
         pager_catalog.adapter = CatalogPageAdapter(Stylish.getAppContext(), activity!!.supportFragmentManager)
         tab_catalog.setupWithViewPager(pager_catalog)
-    }
-
-    private fun setLiveDataObservers() {
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -44,9 +41,5 @@ class FragCatalog: Fragment(){
         mFragCatalogBinding.setLifecycleOwner(activity)
 
         return mFragCatalogBinding.root
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 }

@@ -5,8 +5,8 @@
     <data>
         <import type="android.view.View"/>
         <variable
-                name="FragWomenViewModel"
-                type="com.john.stylish.ui.catalog.women.FragWomenViewModel"/>
+                name="FragAccessoriesViewModel"
+                type="com.john.stylish.ui.catalog.accessories.FragAccessoriesViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -15,7 +15,7 @@
             android:background="@color/white_fa">
 
         <TextView
-                android:id="@+id/products_women"
+                android:id="@+id/products_accessories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
@@ -29,7 +29,7 @@
         <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{FragWomenViewModel.isLoading()? View.VISIBLE: View.GONE}"
+                android:visibility="@{FragAccessoriesViewModel.isLoading()? View.VISIBLE: View.GONE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

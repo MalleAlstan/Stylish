@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 tools:text="@{String.valueOf(MainViewModel.fragType.getTitle())}"
                 android:textColor="@color/black_00"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:elevation="10dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"

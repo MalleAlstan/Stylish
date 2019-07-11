@@ -53,7 +53,7 @@ class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContex
 
     private fun bindCollageViewHolder(holder: CollageViewHolder, product: Product) {
 
-        Glide.with(mContext).load( if (product.images.size > 0) product.images[0] else product.main_image).into(holder.imageLeft)
+        Glide.with(mContext).load( if (product.images.isNotEmpty()) product.images[0] else product.main_image).into(holder.imageLeft)
         Glide.with(mContext).load( if (product.images.size > 1) product.images[1] else product.main_image).into(holder.imageTop)
         Glide.with(mContext).load( if (product.images.size > 2) product.images[2] else product.main_image).into(holder.imageBottom)
         Glide.with(mContext).load( if (product.images.size > 3) product.images[3] else product.main_image).into(holder.imageRight)
