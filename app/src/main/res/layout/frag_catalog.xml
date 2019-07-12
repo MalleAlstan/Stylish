@@ -12,11 +12,9 @@
                 android:layout_height="wrap_content"
                 app:tabTextColor="@color/gray_aa"
                 app:tabSelectedTextColor="@color/black_00"
-                app:tabMode="fixed"
                 app:tabIndicatorColor="@color/black_00"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:elevation="2dp"
+                android:background="@color/white_fa"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" >

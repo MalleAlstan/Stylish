@@ -19,7 +19,7 @@ import java.util.ArrayList
 class FragMenViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
-    var mMenList= MutableLiveData<String>() //MutableLiveData<ArrayList<Any>>()
+    var mMenList= MutableLiveData<ArrayList<Product>>() //MutableLiveData<ArrayList<Any>>()
 
     init {
         isLoading.value = false
@@ -33,7 +33,7 @@ class FragMenViewModel : ViewModel() {
             .getProductsMen()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {setMenList(it.data); mMenList.value = it.data.toString()},
+                onNext = {setMenList(it.data); mMenList.value = it.data},
                 onError = { Log.d(Constants.TAG, it.toString()); isLoading.value = false },
                 onComplete = { Log.d(Constants.TAG, "Loading ProductsMen ok"); isLoading.value = false}
             )

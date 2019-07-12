@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+    <ImageView
+            android:id="@+id/image_catalog_linear_main"
+            android:layout_width="156dp"
+            android:layout_height="200dp"
+            android:background="@drawable/ic_placeholder"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_placeholder"/>
+
+    <LinearLayout android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingLeft="24dp"
+                  app:layout_constraintStart_toEndOf="@id/image_catalog_linear_main"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+                android:id="@+id/text_catalog_linear_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:letterSpacing="0.15"
+                android:textColor="@color/black_00"
+                android:textSize="15sp"
+                android:layout_marginBottom="8dp"
+                tools:text="Uniqlo 特級超輕羽絨外套"/>
+
+        <TextView
+                android:id="@+id/text_catalog_linear_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:letterSpacing="0.15"
+                android:lines="1"
+                android:textColor="@color/black_00"
+                android:textSize="15sp"
+                tools:text="9999$"/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

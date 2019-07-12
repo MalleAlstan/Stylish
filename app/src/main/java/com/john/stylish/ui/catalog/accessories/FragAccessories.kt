@@ -5,22 +5,27 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
 import com.john.stylish.databinding.FragAccessoriesBinding
 import com.john.stylish.databinding.FragMenBinding
+import com.john.stylish.model.objects.Product.Product
+import com.john.stylish.ui.catalog.CatalogProductsAdapter
 import com.john.stylish.ui.catalog.men.FragMenViewModel
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_accessories.*
+import kotlinx.android.synthetic.main.frag_women.*
 
 class FragAccessories: Fragment(){
 
     lateinit var mFragAccessoriesViewModel: FragAccessoriesViewModel
     lateinit var mFragAccessoriesBinding: FragAccessoriesBinding
     lateinit var mProductsAccessoriesDisposable: Disposable
-    lateinit var mProductsAccessoriesObserver: Observer<String>
+    lateinit var mProductsAccessoriesObserver: Observer<ArrayList<Product>>
+    lateinit var mProductsWomenAdapter: CatalogProductsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return setDataBinding(inflater, container)
@@ -35,12 +40,14 @@ class FragAccessories: Fragment(){
     }
 
     private fun showProductsAccessoriesView(){
+        recyclerView_products_accessories.layoutManager = LinearLayoutManager(context)
         mProductsAccessoriesDisposable = mFragAccessoriesViewModel.getProductsAccessories()
     }
 
     private fun setLiveDataObservers() {
         mProductsAccessoriesObserver = Observer {
-            products_accessories.setText(it)
+            mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, CatalogProductsAdapter.RecyclerViewType.LINEAR)
+            recyclerView_products_accessories.adapter = mProductsWomenAdapter
         }
         mFragAccessoriesViewModel.mAccessoriesList.observe(this, mProductsAccessoriesObserver)
     }

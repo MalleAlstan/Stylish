@@ -15,7 +15,7 @@ import java.util.ArrayList
 class FragAccessoriesViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
-    var mAccessoriesList= MutableLiveData<String>() //MutableLiveData<ArrayList<Any>>()
+    var mAccessoriesList= MutableLiveData<ArrayList<Product>>() //MutableLiveData<ArrayList<Any>>()
 
     init {
         isLoading.value = false
@@ -26,10 +26,10 @@ class FragAccessoriesViewModel : ViewModel() {
         isLoading.value = true
 
         val disposable = ProductRepository
-            .getProductsWomen()
+            .getProductsAccessories()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {setAccessoriesList(it.data); mAccessoriesList.value = it.data.toString()},
+                onNext = {setAccessoriesList(it.data); mAccessoriesList.value = it.data},
                 onError = { Log.d(Constants.TAG, it.toString()); isLoading.value = false },
                 onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok"); isLoading.value = false}
             )
