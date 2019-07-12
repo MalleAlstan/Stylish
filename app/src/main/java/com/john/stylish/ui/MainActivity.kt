@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import com.john.stylish.R
@@ -69,6 +70,7 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         btn_nav_catalog.setOnClickListener(this)
         btn_nav_cart.setOnClickListener(this)
         btn_nav_profile.setOnClickListener(this)
+        catalog_type.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -77,7 +79,14 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
             R.id.btn_nav_catalog -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.CATALOG
             R.id.btn_nav_cart -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.CART
             R.id.btn_nav_profile -> mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.PROFILE
+            R.id.catalog_type -> changeCatalogType()
         }
+    }
+
+    private fun changeCatalogType(){
+        if (mMainViewModel.catalogType.value == MainViewModel.CATALOG_TYPE.LINEAR)
+            mMainViewModel.catalogType.value = MainViewModel.CATALOG_TYPE.GRID
+        else mMainViewModel.catalogType.value = MainViewModel.CATALOG_TYPE.LINEAR
     }
 
     private fun transFragment(fragType: MainViewModel.FRAG_TYPE?) {

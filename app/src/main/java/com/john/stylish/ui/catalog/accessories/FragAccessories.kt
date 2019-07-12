@@ -5,22 +5,25 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
 import com.john.stylish.databinding.FragAccessoriesBinding
-import com.john.stylish.databinding.FragMenBinding
 import com.john.stylish.model.objects.Product.Product
+import com.john.stylish.ui.MainViewModel
 import com.john.stylish.ui.catalog.CatalogProductsAdapter
-import com.john.stylish.ui.catalog.men.FragMenViewModel
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_accessories.*
-import kotlinx.android.synthetic.main.frag_women.*
+import kotlinx.android.synthetic.main.frag_men.*
 
 class FragAccessories: Fragment(){
 
+    lateinit var mMainViewModel: MainViewModel
+    lateinit var mCatalogTypeObserver: Observer<MainViewModel.CATALOG_TYPE>
     lateinit var mFragAccessoriesViewModel: FragAccessoriesViewModel
     lateinit var mFragAccessoriesBinding: FragAccessoriesBinding
     lateinit var mProductsAccessoriesDisposable: Disposable
@@ -36,23 +39,34 @@ class FragAccessories: Fragment(){
         super.onActivityCreated(savedInstanceState)
 
         setLiveDataObservers()
-        showProductsAccessoriesView()
+        showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.LINEAR)
     }
 
-    private fun showProductsAccessoriesView(){
-        recyclerView_products_accessories.layoutManager = LinearLayoutManager(context)
+    private fun showProductsAccessoriesView(type: MainViewModel.CATALOG_TYPE){
+        if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_accessories.layoutManager = LinearLayoutManager(context)
+        else recyclerView_products_accessories.layoutManager = GridLayoutManager(context, 2)
+
         mProductsAccessoriesDisposable = mFragAccessoriesViewModel.getProductsAccessories()
     }
 
     private fun setLiveDataObservers() {
         mProductsAccessoriesObserver = Observer {
-            mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, CatalogProductsAdapter.RecyclerViewType.LINEAR)
+            mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
             recyclerView_products_accessories.adapter = mProductsWomenAdapter
         }
         mFragAccessoriesViewModel.mAccessoriesList.observe(this, mProductsAccessoriesObserver)
+
+        mCatalogTypeObserver = Observer {
+            if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.LINEAR)
+            else showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.GRID)
+
+            Log.d("123456", it.toString())
+        }
+        mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         mFragAccessoriesViewModel = ViewModelProviders.of(this).get(FragAccessoriesViewModel::class.java)
         mFragAccessoriesBinding = DataBindingUtil.inflate(inflater, R.layout.frag_accessories, container , false)
         mFragAccessoriesBinding.fragAccessoriesViewModel = mFragAccessoriesViewModel

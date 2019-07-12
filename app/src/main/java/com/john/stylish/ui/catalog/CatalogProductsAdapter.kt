@@ -10,18 +10,15 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.john.stylish.R
 import com.john.stylish.model.objects.Product.Product
+import com.john.stylish.ui.MainViewModel
 
 class CatalogProductsAdapter(
-    private val mHotsList: ArrayList<Product>,
+    private val mProductList: ArrayList<Product>,
     private val mContext: Context,
-    private val mType: RecyclerViewType) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    private val mMainViewModel: MainViewModel
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val mInflator: LayoutInflater
-
-    enum class RecyclerViewType {
-        LINEAR,
-        GRID
-    }
 
     init {
         this.mInflator = LayoutInflater.from(mContext)
@@ -40,19 +37,20 @@ class CatalogProductsAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is LinearViewHolder -> bindLinearViewHolder(holder, mHotsList[position])
-            is GridViewHolder -> bindGridViewHolder(holder, mHotsList[position])
+            is LinearViewHolder -> bindLinearViewHolder(holder, mProductList[position])
+            is GridViewHolder -> bindGridViewHolder(holder, mProductList[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return mHotsList.size
+        return mProductList.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (mType){
-            RecyclerViewType.LINEAR -> TYPE_LINEAR
-            RecyclerViewType.GRID -> TYPE_GRID
+        return when (mMainViewModel.catalogType.value){
+            MainViewModel.CATALOG_TYPE.LINEAR -> TYPE_LINEAR
+            MainViewModel.CATALOG_TYPE.GRID -> TYPE_GRID
+            else -> TYPE_LINEAR
         }
     }
 
@@ -99,5 +97,4 @@ class CatalogProductsAdapter(
         private const val TYPE_LINEAR = 0
         private const val TYPE_GRID   = 0x01
     }
-
 }

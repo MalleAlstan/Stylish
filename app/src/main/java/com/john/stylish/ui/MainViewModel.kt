@@ -2,6 +2,7 @@ package com.john.stylish.ui
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.john.stylish.ui.catalog.CatalogProductsAdapter
 import com.john.stylish.utils.Constants.APP_NAME
 import com.john.stylish.utils.Constants.CART_TITLE
 import com.john.stylish.utils.Constants.CATALOG_TITLE
@@ -12,9 +13,11 @@ import com.john.stylish.ui.MainViewModel.FRAG_TYPE as FRAG_TYPE1
 class MainViewModel: ViewModel(){
 
     var fragType = MutableLiveData<FRAG_TYPE>()
+    var catalogType = MutableLiveData<CATALOG_TYPE>()
 
     init {
         fragType.value = FRAG_TYPE.HOME
+        catalogType.value = CATALOG_TYPE.LINEAR
     }
 
     enum class FRAG_TYPE{
@@ -48,6 +51,16 @@ class MainViewModel: ViewModel(){
 
         fun getProfileVisibility(): Boolean{
             return this == PROFILE
+        }
+    }
+
+    enum class CATALOG_TYPE {
+        LINEAR,
+        GRID;
+
+        fun getLinearVisibility(): Boolean{
+            return this != LINEAR
+
         }
     }
 }
