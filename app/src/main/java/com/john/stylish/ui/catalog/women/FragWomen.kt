@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
+import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragWomenBinding
 import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
@@ -19,6 +20,7 @@ import com.john.stylish.ui.catalog.CatalogProductsAdapter
 import com.john.stylish.ui.catalog.men.FragMenViewModel
 
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_men.*
 import kotlinx.android.synthetic.main.frag_women.*
 
@@ -43,24 +45,31 @@ class FragWomen: Fragment(){
     }
 
     private fun showProductsMenView(type: MainViewModel.CATALOG_TYPE){
+        mFragWomenViewModel.isLoading.value = true
         if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_women.layoutManager = LinearLayoutManager(context)
         else recyclerView_products_women.layoutManager = GridLayoutManager(context, 2)
-
         mProductsWomenDisposable = mFragWomenViewModel.getProductsWomen()
+
+        swipe_women.setDistanceToTriggerSync(250)
+        swipe_women.setProgressViewEndTarget(true, 150)
+        swipe_women.setColorSchemeResources(R.color.colorAccent)
+        swipe_women.setOnRefreshListener {
+            mProductsWomenDisposable = mFragWomenViewModel.getProductsWomen()
+        }
     }
 
     private fun setLiveDataObservers() {
         mProductsWomenObserver = Observer {
             mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
             recyclerView_products_women.adapter = mProductsWomenAdapter
+            mFragWomenViewModel.isLoading.value = false
+            swipe_women.isRefreshing = false
         }
         mFragWomenViewModel.mWomenList.observe(this, mProductsWomenObserver)
 
         mCatalogTypeObserver = Observer {
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
-
-            Log.d("123456", it.toString())
         }
         mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }

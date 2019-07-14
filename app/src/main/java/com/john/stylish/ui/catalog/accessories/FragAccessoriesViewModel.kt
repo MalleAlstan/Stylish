@@ -22,16 +22,13 @@ class FragAccessoriesViewModel : ViewModel() {
     }
 
     fun getProductsAccessories(): Disposable {
-
-        isLoading.value = true
-
         val disposable = ProductRepository
             .getProductsAccessories()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {setAccessoriesList(it.data); mAccessoriesList.value = it.data},
-                onError = { Log.d(Constants.TAG, it.toString()); isLoading.value = false },
-                onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok"); isLoading.value = false}
+                onError = { Log.d(Constants.TAG, it.toString())},
+                onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok")}
             )
         return disposable
     }

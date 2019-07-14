@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Stylish</string>
 
-    <string name="men">Men</string>
-    <string name="women">Women</string>
-    <string name="accessories">Accessories</string>
+    <string name="catalog">型錄</string>
+    <string name="cart">購物車</string>
+    <string name="profile">個人</string>
 
+    <string name="men">男裝</string>
+    <string name="women">女裝</string>
+    <string name="accessories">配件</string>
 </resources>

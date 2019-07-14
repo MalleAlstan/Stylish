@@ -1,21 +1,462 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white_fa">
+            android:background="@color/white_fafafa">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:textSize="30dp"
-                android:textColor="@color/black_00"
+        <ImageView
+                android:id="@+id/img_profile_user_background"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                android:background="@color/black_3f43a3a"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_profile_user_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/lanlan"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@id/img_profile_user_background"
+                app:layout_constraintTop_toTopOf="@id/img_profile_user_background"
+                app:layout_constraintBottom_toBottomOf="@id/img_profile_user_background"/>
+
+        <LinearLayout
+                android:id="@+id/linear_profile_user_information"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintStart_toEndOf="@id/img_profile_user_image"
+                app:layout_constraintTop_toTopOf="@id/img_profile_user_image"
+                app:layout_constraintBottom_toBottomOf="@id/img_profile_user_image"
+                app:layout_constraintEnd_toEndOf="@id/img_profile_user_background"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/text_profile_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/white_fafafa"
+                    android:letterSpacing="0.15"
+                    android:text="爛爛貓"/>
+
+            <TextView
+                    android:id="@+id/text_profile_user_payment_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray_999999"
+                    android:letterSpacing="0.15"
+                    android:text="累計消費 NT$9487"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/text_profile_my_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#3f3a3a"
+                android:letterSpacing="0.15"
+                android:text="我的訂單"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@id/img_profile_user_background"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+                android:id="@+id/linear_profile_my_order"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/text_profile_my_order">
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_awaiting_payment"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="待付款"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_awaiting_shipment"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="待出貨"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_shipped"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="待簽收"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_awaiting_review"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="待評價"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_exchange"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="退換貨"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/text_profile_more_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#3f3a3a"
+                android:letterSpacing="0.15"
+                android:text="更多服務"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@id/linear_profile_my_order"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+                android:id="@+id/linear_profile_more_service_row_1"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/text_profile_more_service">
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_starred"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="收藏"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_notification"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="貨到通知"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_refunded"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="帳戶退款"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_address"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="地址"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linear_profile_more_service_row_2"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/linear_profile_more_service_row_1">
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_customer_service"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="客服訊息"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_system_feedback"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="系統回饋"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_register_cellphone"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="手機綁定"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                <ImageView
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
+                        android:background="@drawable/ic_settings"
+                        android:layout_gravity="center"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_nav_button"
+                        android:textColor="@color/black_3f43a3a"
+                        android:layout_marginTop="8dp"
+                        android:text="設定"
+                        android:textSize="13sp"
+                        android:letterSpacing="0.15"
+                        android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
+
 </layout>

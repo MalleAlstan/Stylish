@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
+import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragHomeBinding
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_home.*
+import kotlin.math.roundToInt
 
 class FragHome: Fragment(){
 
@@ -36,14 +38,24 @@ class FragHome: Fragment(){
     }
 
     private fun showHotListsView(){
+        mFragHomeViewModel.isLoading.value = true
         recyclerView_hot_list.layoutManager = LinearLayoutManager(context)
         mHotsListDisposable = mFragHomeViewModel.getHotsList()
+
+        swipe_home.setDistanceToTriggerSync(250)
+        swipe_home.setProgressViewEndTarget(true, 150)
+        swipe_home.setColorSchemeResources(R.color.colorAccent)
+        swipe_home.setOnRefreshListener {
+            mHotsListDisposable = mFragHomeViewModel.getHotsList()
+        }
     }
 
     private fun setLiveDataObservers() {
         mHotsListObserver = Observer {
             mHotsListAdapter = HotsListAdapter(it!!, activity!!)
             recyclerView_hot_list.adapter = mHotsListAdapter
+            mFragHomeViewModel.isLoading.value = false
+            swipe_home.isRefreshing = false
         }
         mFragHomeViewModel.mHotsList.observe(this, mHotsListObserver)
     }

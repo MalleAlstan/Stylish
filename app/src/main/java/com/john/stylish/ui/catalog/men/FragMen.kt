@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
+import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragMenBinding
 import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
@@ -19,6 +20,7 @@ import com.john.stylish.ui.catalog.CatalogProductsAdapter
 
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_men.*
+import kotlinx.android.synthetic.main.frag_women.*
 
 class FragMen: Fragment(){
 
@@ -42,24 +44,31 @@ class FragMen: Fragment(){
     }
 
     private fun showProductsMenView(type: MainViewModel.CATALOG_TYPE){
+        mFragMenViewModel.isLoading.value = true
         if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_men.layoutManager = LinearLayoutManager(context)
         else recyclerView_products_men.layoutManager = GridLayoutManager(context, 2)
-
         mProductsMenDisposable = mFragMenViewModel.getProductsMen()
+
+        swipe_men.setDistanceToTriggerSync(250)
+        swipe_men.setProgressViewEndTarget(true, 150)
+        swipe_men.setColorSchemeResources(R.color.colorAccent)
+        swipe_men.setOnRefreshListener {
+            mProductsMenDisposable = mFragMenViewModel.getProductsMen()
+        }
     }
 
     private fun setLiveDataObservers() {
         mProductsMenObserver = Observer {
             mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
             recyclerView_products_men.adapter = mProductsWomenAdapter
+            mFragMenViewModel.isLoading.value = false
+            swipe_men.isRefreshing = false
         }
         mFragMenViewModel.mMenList.observe(this, mProductsMenObserver)
 
         mCatalogTypeObserver = Observer {
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
-
-            Log.d("123456", it.toString())
         }
         mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }

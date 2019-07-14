@@ -69,8 +69,8 @@ class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContex
     override fun getItemViewType(position: Int): Int {
         return when {
             mHotsList[position] is String -> TYPE_TITLE
-            position%2 == 0 && mHotsList[position] is Product -> TYPE_FULL
-            position%2 == 1 && mHotsList[position] is Product -> TYPE_COLLAGE
+            position%2 == 1 && mHotsList[position] is Product -> TYPE_FULL
+            position%2 == 0 && mHotsList[position] is Product -> TYPE_COLLAGE
 //            position == 1 && mHotsList[position] is Product -> TYPE_FULL
 //            mHotsList[position] is Product -> TYPE_COLLAGE
             else -> TYPE_LOADING

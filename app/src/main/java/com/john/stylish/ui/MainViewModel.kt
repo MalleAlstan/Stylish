@@ -2,12 +2,9 @@ package com.john.stylish.ui
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.john.stylish.ui.catalog.CatalogProductsAdapter
+import com.john.stylish.R
+import com.john.stylish.Stylish
 import com.john.stylish.utils.Constants.APP_NAME
-import com.john.stylish.utils.Constants.CART_TITLE
-import com.john.stylish.utils.Constants.CATALOG_TITLE
-import com.john.stylish.utils.Constants.PROFILE_TITLE
-import com.john.stylish.ui.MainViewModel.FRAG_TYPE as FRAG_TYPE1
 
 
 class MainViewModel: ViewModel(){
@@ -30,9 +27,9 @@ class MainViewModel: ViewModel(){
             var title = APP_NAME
             when(this){
                 HOME -> title = APP_NAME
-                CATALOG -> title = CATALOG_TITLE
-                CART -> title = CART_TITLE
-                PROFILE -> title = PROFILE_TITLE
+                CATALOG -> title = Stylish.getAppContext().getString(R.string.catalog)
+                CART -> title = Stylish.getAppContext().getString(R.string.cart)
+                PROFILE -> title = Stylish.getAppContext().getString(R.string.profile)
             }
             return title
         }
