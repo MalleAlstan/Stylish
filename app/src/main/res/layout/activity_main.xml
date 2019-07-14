@@ -30,15 +30,15 @@
 
         <ImageView
                 android:id="@+id/app_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/ic_basic_width"
+                android:layout_height="@dimen/ic_basic_height"
                 android:layout_marginStart="20dp"
                 android:padding="10dp"
                 app:layout_constraintStart_toStartOf="@+id/app_toolbar"
                 app:layout_constraintTop_toTopOf="@+id/app_title"
                 app:layout_constraintBottom_toBottomOf="@+id/app_title"
                 android:elevation="10dp"
-                android:background="@drawable/ic_app_menu"/>
+                android:background="@drawable/ic_drawer"/>
 
         <TextView
                 android:id="@+id/app_title"
@@ -55,15 +55,15 @@
 
         <ImageView
                 android:id="@+id/catalog_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/ic_basic_width"
+                android:layout_height="@dimen/ic_basic_height"
                 android:layout_marginEnd="20dp"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/app_toolbar"
                 app:layout_constraintTop_toTopOf="@+id/app_title"
                 app:layout_constraintBottom_toBottomOf="@+id/app_title"
                 android:elevation="10dp"
-                android:background="@{MainViewModel.catalogType.getLinearVisibility()? @drawable/ic_catalog_linear : @drawable/ic_catalog_grid}"
+                android:background="@{MainViewModel.catalogType.getLinearVisibility()? @drawable/ic_list_view : @drawable/ic_collection_view}"
                 android:visibility="@{MainViewModel.fragType.getCatalogVisibility()? View.VISIBLE : View.GONE, default=gone}"
         />
 
@@ -101,8 +101,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_home_normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_home_normal"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getHomeVisibility()? View.GONE : View.VISIBLE, default=gone}"
@@ -113,8 +113,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_home_selected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_home_selected"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getHomeVisibility()? View.VISIBLE : View.GONE, default=visible}"
@@ -137,8 +137,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_catalog_normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_catalog_normal"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getCatalogVisibility()? View.GONE : View.VISIBLE, default=visible}"
@@ -149,8 +149,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_catalog_selected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_catalog_selected"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getCatalogVisibility()? View.VISIBLE : View.GONE, default=gone}"
@@ -173,8 +173,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_cart_normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_cart_normal"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getCartVisibility()? View.GONE : View.VISIBLE, default=visible}"
@@ -185,8 +185,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_cart_selected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_cart_selected"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getCartVisibility()? View.VISIBLE : View.GONE, default=gone}"
@@ -209,8 +209,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_profile_normal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_profile_normal"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getProfileVisibility()? View.GONE : View.VISIBLE, default=visible}"
@@ -221,8 +221,8 @@
 
                 <ImageView
                         android:id="@+id/img_nav_profile_selected"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/ic_basic_width"
+                        android:layout_height="@dimen/ic_basic_height"
                         android:background="@drawable/ic_profile_selected"
                         android:elevation="10dp"
                         android:visibility="@{MainViewModel.fragType.getProfileVisibility()? View.VISIBLE : View.GONE, default=gone}"

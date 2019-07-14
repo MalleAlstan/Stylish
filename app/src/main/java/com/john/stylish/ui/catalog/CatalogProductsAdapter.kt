@@ -55,13 +55,13 @@ class CatalogProductsAdapter(
     }
 
     private fun bindLinearViewHolder(holder: LinearViewHolder, product: Product) {
-        Glide.with(mContext).load( if (product.main_image !=null ) product.main_image else "").into(holder.imageMain)
+        Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
         holder.textPrice.text = product.price.toString() + "$"
     }
 
     private fun bindGridViewHolder(holder: GridViewHolder, product: Product) {
-        Glide.with(mContext).load( if (product.main_image !=null ) product.main_image else "").into(holder.imageMain)
+        Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
         holder.textPrice.text = product.price.toString() + "$"
     }

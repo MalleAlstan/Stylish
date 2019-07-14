@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="ic_basic_width">24dp</dimen>
+    <dimen name="ic_basic_height">24dp</dimen>
+</resources>
