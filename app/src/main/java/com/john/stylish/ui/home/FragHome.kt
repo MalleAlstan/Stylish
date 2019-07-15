@@ -74,6 +74,6 @@ class FragHome: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        mHotsListDisposable.dispose()
+        if (mHotsListDisposable != null) mHotsListDisposable.dispose()
     }
 }

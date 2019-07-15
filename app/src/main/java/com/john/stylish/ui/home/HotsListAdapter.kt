@@ -55,6 +55,11 @@ class HotsListAdapter(
         Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
         holder.textDescription.text = product.description
+
+        holder.itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
+            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            mMainViewModel.detailProduct.value = product
+        }
     }
 
     private fun bindCollageViewHolder(holder: CollageViewHolder, product: Product) {
@@ -66,6 +71,10 @@ class HotsListAdapter(
 
         holder.textTitle.text = product.title
         holder.textDescription.text = product.description
+        holder.itemView.findViewById<View>(R.id.layout_hots_collage).setOnClickListener {
+            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            mMainViewModel.detailProduct.value = product
+        }
     }
 
     override fun getItemCount(): Int {
@@ -77,8 +86,6 @@ class HotsListAdapter(
             mHotsList[position] is String -> TYPE_TITLE
             position%2 == 1 && mHotsList[position] is Product -> TYPE_FULL
             position%2 == 0 && mHotsList[position] is Product -> TYPE_COLLAGE
-//            position == 1 && mHotsList[position] is Product -> TYPE_FULL
-//            mHotsList[position] is Product -> TYPE_COLLAGE
             else -> TYPE_LOADING
         }
     }
@@ -93,12 +100,6 @@ class HotsListAdapter(
         val imageMain: ImageView = itemView.findViewById(R.id.image_hots_main)
         val textTitle: TextView = itemView.findViewById(R.id.text_hots_title)
         val textDescription: TextView = itemView.findViewById(R.id.text_hots_description)
-
-        init {
-            itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
-                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            }
-        }
     }
 
     private inner class CollageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -109,12 +110,6 @@ class HotsListAdapter(
         val imageRight: ImageView = itemView.findViewById(R.id.image_hots_right)
         val textTitle: TextView = itemView.findViewById(R.id.text_hots_title)
         val textDescription: TextView = itemView.findViewById(R.id.text_hots_description)
-
-        init {
-            itemView.findViewById<View>(R.id.layout_hots_collage).setOnClickListener {
-                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            }
-        }
     }
 
     private inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -22,7 +22,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@color/black_3f43a3a"/>
+                android:background="@color/black_3f3a3a"/>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -112,7 +112,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="待付款"
                         android:textSize="13sp"
@@ -139,7 +139,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="待出貨"
                         android:textSize="13sp"
@@ -166,7 +166,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="待簽收"
                         android:textSize="13sp"
@@ -193,7 +193,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="待評價"
                         android:textSize="13sp"
@@ -220,7 +220,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="退換貨"
                         android:textSize="13sp"
@@ -271,7 +271,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="收藏"
                         android:textSize="13sp"
@@ -300,7 +300,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="貨到通知"
                         android:textSize="13sp"
@@ -329,7 +329,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="帳戶退款"
                         android:textSize="13sp"
@@ -357,7 +357,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="地址"
                         android:textSize="13sp"
@@ -396,7 +396,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="客服訊息"
                         android:textSize="13sp"
@@ -425,7 +425,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="系統回饋"
                         android:textSize="13sp"
@@ -454,7 +454,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="手機綁定"
                         android:textSize="13sp"
@@ -483,7 +483,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/bg_nav_button"
-                        android:textColor="@color/black_3f43a3a"
+                        android:textColor="@color/black_3f3a3a"
                         android:layout_marginTop="8dp"
                         android:text="設定"
                         android:textSize="13sp"

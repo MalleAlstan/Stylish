@@ -44,7 +44,7 @@ class FragWomen: Fragment(){
         setLiveDataObservers()
     }
 
-    private fun showProductsMenView(type: MainViewModel.CATALOG_TYPE){
+    private fun showProductsWomenView(type: MainViewModel.CATALOG_TYPE){
         mFragWomenViewModel.isLoading.value = true
         if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_women.layoutManager = LinearLayoutManager(context)
         else recyclerView_products_women.layoutManager = GridLayoutManager(context, 2)
@@ -68,8 +68,8 @@ class FragWomen: Fragment(){
         mFragWomenViewModel.mWomenList.observe(this, mProductsWomenObserver)
 
         mCatalogTypeObserver = Observer {
-            if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
-            else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
+            if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsWomenView(MainViewModel.CATALOG_TYPE.LINEAR)
+            else showProductsWomenView(MainViewModel.CATALOG_TYPE.GRID)
         }
         mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }
@@ -86,6 +86,6 @@ class FragWomen: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        mProductsWomenDisposable.dispose()
+        if (mProductsWomenDisposable!= null) mProductsWomenDisposable.dispose()
     }
 }

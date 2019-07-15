@@ -85,6 +85,6 @@ class FragMen: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        mProductsMenDisposable.dispose()
+        if (mProductsMenDisposable != null )mProductsMenDisposable.dispose()
     }
 }

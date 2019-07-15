@@ -8,5 +8,14 @@
     <string name="women">女裝</string>
     <string name="accessories">配件</string>
 
+    <string name="color">顏色</string>
+    <string name="size">尺寸</string>
+    <string name="variants">庫存</string>
+    <string name="texture">材質</string>
+    <string name="wash">洗滌</string>
+    <string name="place">產地</string>
+    <string name="note">備註</string>
+    <string name="add_to_cart">加入購物車</string>
+
     <string name="on_working">施工中...</string>
 </resources>

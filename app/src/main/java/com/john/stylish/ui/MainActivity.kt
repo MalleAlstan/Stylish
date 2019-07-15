@@ -13,6 +13,7 @@ import com.john.stylish.R
 import com.john.stylish.base.BaseActivity
 import com.john.stylish.base.BaseInit
 import com.john.stylish.databinding.ActivityMainBinding
+import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.cart.FragCart
 import com.john.stylish.ui.catalog.FragCatalog
 import com.john.stylish.ui.detail.FragDetail

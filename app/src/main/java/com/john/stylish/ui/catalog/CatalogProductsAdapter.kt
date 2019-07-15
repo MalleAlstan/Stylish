@@ -58,12 +58,20 @@ class CatalogProductsAdapter(
         Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
         holder.textPrice.text = product.price.toString() + "$"
+        holder.itemView.findViewById<View>(R.id.layout_catalog_linear).setOnClickListener {
+            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            mMainViewModel.detailProduct.value = product
+        }
     }
 
     private fun bindGridViewHolder(holder: GridViewHolder, product: Product) {
         Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
         holder.textPrice.text = product.price.toString() + "$"
+        holder.itemView.findViewById<View>(R.id.layout_catalog_grid).setOnClickListener {
+            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            mMainViewModel.detailProduct.value = product
+        }
     }
 
     private inner class LinearViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -71,12 +79,6 @@ class CatalogProductsAdapter(
         val imageMain: ImageView = itemView.findViewById(R.id.image_catalog_linear_main)
         val textTitle: TextView = itemView.findViewById(R.id.text_catalog_linear_title)
         val textPrice: TextView = itemView.findViewById(R.id.text_catalog_linear_price)
-
-        init {
-            itemView.findViewById<View>(R.id.layout_catalog_linear).setOnClickListener {
-                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            }
-        }
     }
 
     private inner class GridViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -84,12 +86,6 @@ class CatalogProductsAdapter(
         val imageMain: ImageView = itemView.findViewById(R.id.image_catalog_grid_main)
         val textTitle: TextView = itemView.findViewById(R.id.text_catalog_grid_title)
         val textPrice: TextView = itemView.findViewById(R.id.text_catalog_grid_price)
-
-        init {
-            itemView.findViewById<View>(R.id.layout_catalog_grid).setOnClickListener {
-                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            }
-        }
     }
 
     private inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
