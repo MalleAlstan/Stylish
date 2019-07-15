@@ -15,6 +15,7 @@ import com.john.stylish.base.BaseInit
 import com.john.stylish.databinding.ActivityMainBinding
 import com.john.stylish.ui.cart.FragCart
 import com.john.stylish.ui.catalog.FragCatalog
+import com.john.stylish.ui.detail.FragDetail
 import com.john.stylish.ui.home.FragHome
 import com.john.stylish.ui.profile.FragProfile
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,17 +25,20 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     lateinit var mMainViewModel: MainViewModel
     lateinit var mMainBinding: ActivityMainBinding
     lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
+    lateinit var mLastFrag: MainViewModel.FRAG_TYPE
 
     companion object {
         lateinit var mFragHome: FragHome
         lateinit var mFragCatalog: FragCatalog
         lateinit var mFragCart: FragCart
         lateinit var mFragProfile: FragProfile
+        lateinit var mFragDetail: FragDetail
 
         fun isHomeInit() = :: mFragHome.isInitialized
         fun isCatalogInit() = :: mFragCatalog.isInitialized
         fun isCartInit() = :: mFragCart.isInitialized
         fun isProfileInit() = :: mFragProfile.isInitialized
+        fun isDetailInit() = :: mFragDetail.isInitialized
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,14 +95,22 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     private fun transFragment(fragType: MainViewModel.FRAG_TYPE?) {
 
-        val transaction = supportFragmentManager.beginTransaction()
+        if (fragType != MainViewModel.FRAG_TYPE.DETAIL)  mLastFrag = mMainViewModel.fragType.value!!
 
+        val transaction = supportFragmentManager.beginTransaction()
         when (fragType) {
             MainViewModel.FRAG_TYPE.HOME -> showFragHomeView(transaction)
             MainViewModel.FRAG_TYPE.CATALOG -> showFragCatalogView(transaction)
             MainViewModel.FRAG_TYPE.CART -> showFragCartView(transaction)
             MainViewModel.FRAG_TYPE.PROFILE -> showFragProfileView(transaction)
+            MainViewModel.FRAG_TYPE.DETAIL -> showFragDetailView(transaction)
         }
+    }
+
+    private fun showFragDetailView(transaction: FragmentTransaction){
+        mFragDetail = FragDetail()
+        transaction.add(R.id.frame_frag_container, mFragDetail)
+        transaction.commit()
     }
 
     private fun showFragHomeView(transaction: FragmentTransaction){
@@ -143,5 +155,12 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         if (isCatalogInit()) transaction.hide(mFragCatalog)
         if (isCartInit()) transaction.hide(mFragCart)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if (isDetailInit() && mFragDetail.isAdded) {
+            supportFragmentManager.beginTransaction().remove(mFragDetail).commit()
+            mMainViewModel.fragType.value = mLastFrag
+        } else super.onBackPressed()
     }
 }

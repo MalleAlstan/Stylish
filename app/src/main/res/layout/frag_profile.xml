@@ -2,6 +2,14 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+                name="FragProfileViewModel"
+                type="com.john.stylish.ui.profile.FragProfileViewModel"/>
+    </data>
+
+
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,16 +86,19 @@
         <LinearLayout
                 android:id="@+id/linear_profile_my_order"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="60dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/text_profile_my_order">
 
             <LinearLayout
+                    android:id="@+id/linear_profile_awaiting_payment"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -101,7 +112,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="待付款"
@@ -111,8 +121,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_awaiting_shipment"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -126,7 +139,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="待出貨"
@@ -136,8 +148,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_shipped"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -151,7 +166,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="待簽收"
@@ -161,8 +175,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_awaiting_review"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -176,7 +193,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="待評價"
@@ -186,8 +202,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_exchange"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_gravity="center">
@@ -201,7 +220,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="退換貨"
@@ -219,7 +237,7 @@
                 android:textColor="#3f3a3a"
                 android:letterSpacing="0.15"
                 android:text="更多服務"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintTop_toBottomOf="@id/linear_profile_my_order"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -227,16 +245,19 @@
         <LinearLayout
                 android:id="@+id/linear_profile_more_service_row_1"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="60dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/text_profile_more_service">
 
             <LinearLayout
+                    android:id="@+id/linear_profile_starred"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -250,7 +271,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="收藏"
@@ -260,8 +280,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_notification"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:orientation="vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
@@ -277,7 +300,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="貨到通知"
@@ -287,8 +309,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_refunded"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:orientation="vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
@@ -304,7 +329,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="帳戶退款"
@@ -314,8 +338,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_address"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:orientation="vertical"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
@@ -330,7 +357,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="地址"
@@ -343,16 +369,19 @@
         <LinearLayout
                 android:id="@+id/linear_profile_more_service_row_2"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="60dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/linear_profile_more_service_row_1">
 
             <LinearLayout
+                    android:id="@+id/linear_profile_customer_service"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
@@ -367,7 +396,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="客服訊息"
@@ -377,8 +405,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_system_feedback"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
@@ -394,7 +425,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="系統回饋"
@@ -404,8 +434,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_register_cellphone"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
@@ -421,7 +454,6 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/bg_nav_button"
                         android:textColor="@color/black_3f43a3a"
                         android:layout_marginTop="8dp"
                         android:text="手機綁定"
@@ -431,8 +463,11 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/linear_profile_settings"
                     android:layout_width="60dp"
-                    android:layout_height="51dp"
+                    android:layout_height="60dp"
+                    android:padding="4dp"
+                    android:background="@drawable/bg_nav_button"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical"

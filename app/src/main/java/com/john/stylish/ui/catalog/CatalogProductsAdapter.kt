@@ -73,8 +73,9 @@ class CatalogProductsAdapter(
         val textPrice: TextView = itemView.findViewById(R.id.text_catalog_linear_price)
 
         init {
-//            itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
-//                presenter.openDetail(hotsDataList[adapterPosition] as Product) }
+            itemView.findViewById<View>(R.id.layout_catalog_linear).setOnClickListener {
+                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            }
         }
     }
 
@@ -85,8 +86,9 @@ class CatalogProductsAdapter(
         val textPrice: TextView = itemView.findViewById(R.id.text_catalog_grid_price)
 
         init {
-//            itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
-//                presenter.openDetail(hotsDataList[adapterPosition] as Product) }
+            itemView.findViewById<View>(R.id.layout_catalog_grid).setOnClickListener {
+                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            }
         }
     }
 

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+                name="FragDetailViewModel"
+                type="com.john.stylish.ui.detail.FragDetailViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_fafafa">
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/image_detail_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dp"
+                        android:background="@drawable/ic_placeholder"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_placeholder" />
+
+                <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="厚實毛呢格子外套"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:gravity="end"
+                            android:text="NT$2140"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#888888"
+                        android:letterSpacing="0.15"
+                        android:paddingTop="4dp"
+                        android:paddingStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="WS18479127"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#646464"
+                        android:letterSpacing="0.15"
+                        android:lineSpacingExtra="12sp"
+                        android:paddingTop="24dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="採用高級100%棉質素材的外套。輕盈保暖高質感的針織大衣！精緻做工升級，展現高質感氛圍。"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="顏色"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="尺寸"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="XS - L"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="庫存"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="24"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="材質"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="棉、聚脂纖維"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="洗滌"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="手洗（水溫40度）"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="產地"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="韓國"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="24dp"
+                        android:paddingStart="16dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#646464"
+                            android:letterSpacing="0.15"
+                            android:text="備註"
+                            android:layout_marginEnd="13dp"/>
+
+                    <ImageView
+                            android:layout_width="1dp"
+                            android:layout_height="14dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rectangle_copy"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#3f3a3a"
+                            android:letterSpacing="0.15"
+                            android:text="實品顏色以單品照為主"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{FragDetailViewModel.isLoading()? View.VISIBLE: View.GONE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -10,10 +10,16 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.john.stylish.R
+import com.john.stylish.ui.MainViewModel
 import com.john.stylish.utils.ImageManager
 
 
-class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class HotsListAdapter(
+    private val mHotsList: ArrayList<Any>,
+    private val mContext: Context,
+    private val mMainViewModel: MainViewModel
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
     private val mInflator: LayoutInflater
 
     init {
@@ -89,8 +95,9 @@ class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContex
         val textDescription: TextView = itemView.findViewById(R.id.text_hots_description)
 
         init {
-//            itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
-//                presenter.openDetail(hotsDataList[adapterPosition] as Product) }
+            itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
+                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            }
         }
     }
 
@@ -104,8 +111,9 @@ class HotsListAdapter(private val mHotsList: ArrayList<Any>, private val mContex
         val textDescription: TextView = itemView.findViewById(R.id.text_hots_description)
 
         init {
-//            itemView.findViewById<View>(R.id.layout_hots_collage).setOnClickListener {
-//                presenter.openDetail(hotsDataList[adapterPosition] as Product) }
+            itemView.findViewById<View>(R.id.layout_hots_collage).setOnClickListener {
+                mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+            }
         }
     }
 

@@ -14,12 +14,14 @@ import android.view.ViewGroup
 import com.john.stylish.R
 import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragHomeBinding
+import com.john.stylish.ui.MainViewModel
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_home.*
 import kotlin.math.roundToInt
 
 class FragHome: Fragment(){
 
+    lateinit var mMainViewModel: MainViewModel
     lateinit var mFragHomeViewModel: FragHomeViewModel
     lateinit var mFragHomeBinding: FragHomeBinding
     lateinit var mHotsListDisposable: Disposable
@@ -52,7 +54,7 @@ class FragHome: Fragment(){
 
     private fun setLiveDataObservers() {
         mHotsListObserver = Observer {
-            mHotsListAdapter = HotsListAdapter(it!!, activity!!)
+            mHotsListAdapter = HotsListAdapter(it!!, activity!!, mMainViewModel)
             recyclerView_hot_list.adapter = mHotsListAdapter
             mFragHomeViewModel.isLoading.value = false
             swipe_home.isRefreshing = false
@@ -61,6 +63,7 @@ class FragHome: Fragment(){
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         mFragHomeViewModel = ViewModelProviders.of(this).get(FragHomeViewModel::class.java)
         mFragHomeBinding = DataBindingUtil.inflate(inflater, R.layout.frag_home, container , false)
         mFragHomeBinding.fragHomeViewModel = mFragHomeViewModel

@@ -21,7 +21,8 @@ class MainViewModel: ViewModel(){
         HOME,
         CATALOG,
         CART,
-        PROFILE;
+        PROFILE,
+        DETAIL;
 
         fun getTitle(): String {
             var title = APP_NAME
@@ -48,6 +49,10 @@ class MainViewModel: ViewModel(){
 
         fun getProfileVisibility(): Boolean{
             return this == PROFILE
+        }
+
+        fun getDetailVisibility(): Boolean{
+            return this == DETAIL
         }
     }
 
