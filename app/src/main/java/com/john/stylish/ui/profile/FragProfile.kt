@@ -24,12 +24,7 @@ class FragProfile: Fragment(), View.OnClickListener{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setLiveDataObservers()
         setOnClickListeners()
-    }
-
-
-    private fun setLiveDataObservers() {
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {

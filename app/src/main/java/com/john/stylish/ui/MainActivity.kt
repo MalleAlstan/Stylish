@@ -51,9 +51,9 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     override fun init() {
         setTransparentStatusBar()
         setDataBinding()
-        setToolbarPadding(app_toolbar)
-        setOnClickListeners()
         setLiveDataObservers()
+        setOnClickListeners()
+        setToolbarPadding(app_toolbar)
     }
 
     private fun setDataBinding() {

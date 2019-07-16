@@ -33,6 +33,15 @@ class FragDetail : Fragment() {
         showProductDetailView()
     }
 
+    private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        mFragDetailViewModel = ViewModelProviders.of(this).get(FragDetailViewModel::class.java)
+        mFragDetailBinding = DataBindingUtil.inflate(inflater, R.layout.frag_detail, container, false)
+        mFragDetailBinding.fragDetailViewModel = mFragDetailViewModel
+        mFragDetailBinding.setLifecycleOwner(activity)
+        return mFragDetailBinding.root
+    }
+
     private fun showProductDetailView() {
         mFragDetailViewModel.isLoading.value = true
 
@@ -58,14 +67,5 @@ class FragDetail : Fragment() {
         recyclerView_detail_colors.adapter = ProductColorsAdapter(product.colors)
 
         mFragDetailViewModel.isLoading.value = false
-    }
-
-    private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
-        mFragDetailViewModel = ViewModelProviders.of(this).get(FragDetailViewModel::class.java)
-        mFragDetailBinding = DataBindingUtil.inflate(inflater, R.layout.frag_detail, container, false)
-        mFragDetailBinding.fragDetailViewModel = mFragDetailViewModel
-        mFragDetailBinding.setLifecycleOwner(activity)
-        return mFragDetailBinding.root
     }
 }

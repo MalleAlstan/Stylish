@@ -41,17 +41,19 @@ class FragHome: Fragment(){
         showHotListsView()
     }
 
-    private fun showHotListsView(){
-        mFragHomeViewModel.isLoading.value = true
-        recyclerView_hot_list.layoutManager = LinearLayoutManager(context)
-        mHotsListDisposable = mFragHomeViewModel.getHotsList()
+    override fun onPause() {
+        super.onPause()
+        if (mHotsListDisposable != null) mHotsListDisposable.dispose()
+    }
 
-        swipe_home.setDistanceToTriggerSync(250)
-        swipe_home.setProgressViewEndTarget(true, 150)
-        swipe_home.setColorSchemeResources(R.color.colorAccent)
-        swipe_home.setOnRefreshListener {
-            mHotsListDisposable = mFragHomeViewModel.getHotsList()
-        }
+    private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        mFragHomeViewModel = ViewModelProviders.of(this).get(FragHomeViewModel::class.java)
+        mFragHomeBinding = DataBindingUtil.inflate(inflater, R.layout.frag_home, container , false)
+        mFragHomeBinding.fragHomeViewModel = mFragHomeViewModel
+        mFragHomeBinding.setLifecycleOwner(activity)
+
+        return mFragHomeBinding.root
     }
 
     private fun setLiveDataObservers() {
@@ -67,18 +69,16 @@ class FragHome: Fragment(){
         mFragHomeViewModel.mHotsList.observe(this, mHotsListObserver)
     }
 
-    private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
-        mFragHomeViewModel = ViewModelProviders.of(this).get(FragHomeViewModel::class.java)
-        mFragHomeBinding = DataBindingUtil.inflate(inflater, R.layout.frag_home, container , false)
-        mFragHomeBinding.fragHomeViewModel = mFragHomeViewModel
-        mFragHomeBinding.setLifecycleOwner(activity)
+    private fun showHotListsView(){
+        mFragHomeViewModel.isLoading.value = true
+        recyclerView_hot_list.layoutManager = LinearLayoutManager(context)
+        mHotsListDisposable = mFragHomeViewModel.getHotsList()
 
-        return mFragHomeBinding.root
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (mHotsListDisposable != null) mHotsListDisposable.dispose()
+        swipe_home.setDistanceToTriggerSync(250)
+        swipe_home.setProgressViewEndTarget(true, 150)
+        swipe_home.setColorSchemeResources(R.color.colorAccent)
+        swipe_home.setOnRefreshListener {
+            mHotsListDisposable = mFragHomeViewModel.getHotsList()
+        }
     }
 }
