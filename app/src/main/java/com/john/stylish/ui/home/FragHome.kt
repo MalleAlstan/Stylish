@@ -15,8 +15,10 @@ import com.john.stylish.R
 import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragHomeBinding
 import com.john.stylish.ui.MainViewModel
+import com.john.stylish.ui.catalog.CatalogProductsAdapter
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_home.*
+import kotlinx.android.synthetic.main.frag_women.*
 import kotlin.math.roundToInt
 
 class FragHome: Fragment(){
@@ -54,8 +56,11 @@ class FragHome: Fragment(){
 
     private fun setLiveDataObservers() {
         mHotsListObserver = Observer {
-            mHotsListAdapter = HotsListAdapter(it!!, activity!!, mMainViewModel)
-            recyclerView_hot_list.adapter = mHotsListAdapter
+            if (recyclerView_hot_list.adapter == null){
+                mHotsListAdapter = HotsListAdapter(it!!, activity!!, mMainViewModel)
+                recyclerView_hot_list.adapter = mHotsListAdapter
+            } else mHotsListAdapter.updateData(it!!)
+
             mFragHomeViewModel.isLoading.value = false
             swipe_home.isRefreshing = false
         }

@@ -15,7 +15,7 @@ import com.john.stylish.utils.ImageManager
 
 
 class HotsListAdapter(
-    private val mHotsList: ArrayList<Any>,
+    private var mHotsList: ArrayList<Any>,
     private val mContext: Context,
     private val mMainViewModel: MainViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -120,6 +120,11 @@ class HotsListAdapter(
         private const val TYPE_TITLE   = 0x01
         private const val TYPE_FULL    = 0x02
         private const val TYPE_COLLAGE = 0x03
+    }
+
+    fun updateData(anyList:ArrayList<Any>) {
+        mHotsList = anyList
+        notifyDataSetChanged()
     }
 
 }
