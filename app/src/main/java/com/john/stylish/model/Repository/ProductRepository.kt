@@ -20,25 +20,25 @@ object ProductRepository {
         return getHotsListCall.subscribeOn(Schedulers.io())
     }
 
-    fun getProductsMen(): Observable<ProductsResponse> {
+    fun getProductsMen(page: String): Observable<ProductsResponse> {
 
-        val getProductsMenCall = ApiServiceBuilder.build().getProductsMen()
+        val getProductsMenCall = ApiServiceBuilder.build().getProductsMen(page)
         Log.d(Constants.TAG, "Load ProductsMenList from API")
 
         return getProductsMenCall.subscribeOn(Schedulers.io())
     }
 
-    fun getProductsWomen(): Observable<ProductsResponse> {
+    fun getProductsWomen(page: String): Observable<ProductsResponse> {
 
-        val getProductsWomenCall = ApiServiceBuilder.build().getProductsWomen()
+        val getProductsWomenCall = ApiServiceBuilder.build().getProductsWomen(page)
         Log.d(Constants.TAG, "Load ProductsWomenList from API")
 
         return getProductsWomenCall.subscribeOn(Schedulers.io())
     }
 
-    fun getProductsAccessories(): Observable<ProductsResponse> {
+    fun getProductsAccessories(page: String): Observable<ProductsResponse> {
 
-        val getProductsWomenCall = ApiServiceBuilder.build().getProductsAccessories()
+        val getProductsWomenCall = ApiServiceBuilder.build().getProductsAccessories(page)
         Log.d(Constants.TAG, "Load ProductssAccessoriesList from API")
 
         return getProductsWomenCall.subscribeOn(Schedulers.io())

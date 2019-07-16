@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,37 +41,11 @@ class FragMen: Fragment(){
         super.onActivityCreated(savedInstanceState)
 
         setLiveDataObservers()
-        showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
     }
 
-    private fun showProductsMenView(type: MainViewModel.CATALOG_TYPE){
-        mFragMenViewModel.isLoading.value = true
-        if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_men.layoutManager = LinearLayoutManager(context)
-        else recyclerView_products_men.layoutManager = GridLayoutManager(context, 2)
-        mProductsMenDisposable = mFragMenViewModel.getProductsMen()
-
-        swipe_men.setDistanceToTriggerSync(250)
-        swipe_men.setProgressViewEndTarget(true, 150)
-        swipe_men.setColorSchemeResources(R.color.colorAccent)
-        swipe_men.setOnRefreshListener {
-            mProductsMenDisposable = mFragMenViewModel.getProductsMen()
-        }
-    }
-
-    private fun setLiveDataObservers() {
-        mProductsMenObserver = Observer {
-            mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
-            recyclerView_products_men.adapter = mProductsWomenAdapter
-            mFragMenViewModel.isLoading.value = false
-            swipe_men.isRefreshing = false
-        }
-        mFragMenViewModel.mMenList.observe(this, mProductsMenObserver)
-
-        mCatalogTypeObserver = Observer {
-            if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
-            else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
-        }
-        mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
+    override fun onPause() {
+        super.onPause()
+        if (mProductsMenDisposable != null )mProductsMenDisposable.dispose()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -83,8 +58,57 @@ class FragMen: Fragment(){
         return mFragMenBinding.root
     }
 
-    override fun onPause() {
-        super.onPause()
-        if (mProductsMenDisposable != null )mProductsMenDisposable.dispose()
+    private fun setLiveDataObservers() {
+        mProductsMenObserver = Observer {
+            if (recyclerView_products_men.adapter == null){
+                mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
+                recyclerView_products_men.adapter = mProductsWomenAdapter
+            } else mProductsWomenAdapter.updateData(it!!)
+
+            mFragMenViewModel.isLoading.value = false
+            swipe_men.isRefreshing = false
+        }
+        mFragMenViewModel.mMenList.observe(this, mProductsMenObserver)
+
+        mCatalogTypeObserver = Observer {
+            if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
+            else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
+        }
+        mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
+    }
+
+    private fun showProductsMenView(type: MainViewModel.CATALOG_TYPE){
+        mFragMenViewModel.isLoading.value = true
+
+        if (type == MainViewModel.CATALOG_TYPE.LINEAR) recyclerView_products_men.layoutManager = LinearLayoutManager(context)
+        else recyclerView_products_men.layoutManager = GridLayoutManager(context, 2)
+
+        recyclerView_products_men.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val visibleItemCount = recyclerView!!.getChildCount()
+                val totalItemCount = recyclerView!!.getLayoutManager()!!.itemCount
+                val firstVisibleItem = (recyclerView!!.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                if (mFragMenViewModel.hasNexPage &&
+                    mFragMenViewModel.isLoading.value != true &&
+                    totalItemCount - visibleItemCount <= firstVisibleItem) {
+
+                    mFragMenViewModel.isLoading.value = true
+                    mProductsMenDisposable = mFragMenViewModel.getProductsMen()
+                }
+            }
+        })
+
+        swipe_men.setDistanceToTriggerSync(250)
+        swipe_men.setProgressViewEndTarget(true, 150)
+        swipe_men.setColorSchemeResources(R.color.colorAccent)
+        swipe_men.setOnRefreshListener {
+            mFragMenViewModel.resetPaging()
+            mProductsMenDisposable = mFragMenViewModel.getProductsMen()
+        }
+
+        mProductsMenDisposable = mFragMenViewModel.getProductsMen()
     }
 }

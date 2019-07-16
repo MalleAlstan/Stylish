@@ -13,7 +13,7 @@ import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
 
 class CatalogProductsAdapter(
-    private val mProductList: ArrayList<Product>,
+    private var mProductList: ArrayList<Product>,
     private val mContext: Context,
     private val mMainViewModel: MainViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -89,6 +89,11 @@ class CatalogProductsAdapter(
     }
 
     private inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    fun updateData(productList:ArrayList<Product>) {
+        mProductList = productList
+        notifyDataSetChanged()
+    }
 
     companion object {
 

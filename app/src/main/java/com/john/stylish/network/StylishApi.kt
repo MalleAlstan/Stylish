@@ -6,6 +6,7 @@ import com.john.stylish.network.responses.HotsResponse
 import com.john.stylish.network.responses.ProductsResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface StylishApi {
 
@@ -19,13 +20,13 @@ interface StylishApi {
     fun getProductsAll(): Observable<ArrayList<Product>>
 
     @GET("products/women")
-    fun getProductsWomen(): Observable<ProductsResponse>
+    fun getProductsWomen(@Query("paging") page: String): Observable<ProductsResponse>
 
     @GET("products/men")
-    fun getProductsMen(): Observable<ProductsResponse>
+    fun getProductsMen(@Query("paging") page: String): Observable<ProductsResponse>
 
     @GET("products/accessories")
-    fun getProductsAccessories(): Observable<ProductsResponse>
+    fun getProductsAccessories(@Query("paging") page: String): Observable<ProductsResponse>
 
     @GET("products/search")
     fun getProductsSearch(): Observable<ArrayList<Product>>

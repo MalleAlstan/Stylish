@@ -16,33 +16,33 @@ class FragAccessoriesViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
     var mAccessoriesList= MutableLiveData<ArrayList<Product>>() //MutableLiveData<ArrayList<Any>>()
+    var mNextPage = 0
+    var hasNexPage = true
 
     init {
         isLoading.value = false
+        mAccessoriesList.value = ArrayList()
     }
 
     fun getProductsAccessories(): Disposable {
         val disposable = ProductRepository
-            .getProductsAccessories()
+            .getProductsMen(mNextPage.toString())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = {setAccessoriesList(it.data); mAccessoriesList.value = it.data},
+                onNext = {
+                    mAccessoriesList.value = (mAccessoriesList.value!! + it.data) as ArrayList<Product>
+                    if (it.paging == 0) hasNexPage = false
+                    if (hasNexPage) mNextPage = it.paging;
+                },
                 onError = { Log.d(Constants.TAG, it.toString())},
                 onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok")}
             )
         return disposable
     }
 
-    private fun setAccessoriesList(productsMen: ArrayList<Product>){
-        productsMen.toObservable()
-            .subscribeBy (
-                onNext = {
-                    Log.d (Constants.TAG, it.title)
-                    Log.d (Constants.TAG, it.note)
-                    Log.d (Constants.TAG, it.main_image)
-                },
-                onError = { Log.d(Constants.TAG, it.toString()); isLoading.value = false },
-                onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok"); isLoading.value = false}
-            )
+    fun resetPaging(){
+        mAccessoriesList.value = ArrayList()
+        mNextPage = 0
+        hasNexPage = true
     }
 }
