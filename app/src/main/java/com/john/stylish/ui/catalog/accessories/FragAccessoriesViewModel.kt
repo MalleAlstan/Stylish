@@ -26,7 +26,7 @@ class FragAccessoriesViewModel : ViewModel() {
 
     fun getProductsAccessories(): Disposable {
         val disposable = ProductRepository
-            .getProductsMen(mNextPage.toString())
+            .getProductsAccessories(mNextPage.toString())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
@@ -40,7 +40,7 @@ class FragAccessoriesViewModel : ViewModel() {
         return disposable
     }
 
-    fun resetPaging(){
+    fun reset(){
         mAccessoriesList.value = ArrayList()
         mNextPage = 0
         hasNexPage = true

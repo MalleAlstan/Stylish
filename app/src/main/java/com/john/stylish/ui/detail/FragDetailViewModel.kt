@@ -7,7 +7,6 @@ import com.john.stylish.model.objects.Product.Product
 class FragDetailViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
-    var detailProduct = MutableLiveData<Product>()
 
     init {
         isLoading.value = false

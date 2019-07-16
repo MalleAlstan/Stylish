@@ -8,12 +8,10 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
-import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragMenBinding
 import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
@@ -21,7 +19,6 @@ import com.john.stylish.ui.catalog.CatalogProductsAdapter
 
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_men.*
-import kotlinx.android.synthetic.main.frag_women.*
 
 class FragMen: Fragment(){
 
@@ -71,6 +68,7 @@ class FragMen: Fragment(){
         mFragMenViewModel.mMenList.observe(this, mProductsMenObserver)
 
         mCatalogTypeObserver = Observer {
+            mFragMenViewModel.reset()
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsMenView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsMenView(MainViewModel.CATALOG_TYPE.GRID)
         }
@@ -105,7 +103,7 @@ class FragMen: Fragment(){
         swipe_men.setProgressViewEndTarget(true, 150)
         swipe_men.setColorSchemeResources(R.color.colorAccent)
         swipe_men.setOnRefreshListener {
-            mFragMenViewModel.resetPaging()
+            mFragMenViewModel.reset()
             mProductsMenDisposable = mFragMenViewModel.getProductsMen()
         }
 

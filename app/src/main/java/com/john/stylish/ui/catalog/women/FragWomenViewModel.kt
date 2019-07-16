@@ -40,7 +40,7 @@ class FragWomenViewModel : ViewModel() {
         return disposable
     }
 
-    fun resetPaging(){
+    fun reset(){
         mWomenList.value = ArrayList()
         mNextPage = 0
         hasNexPage = true

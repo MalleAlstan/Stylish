@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,6 +68,7 @@ class FragWomen: Fragment(){
         mFragWomenViewModel.mWomenList.observe(this, mProductsWomenObserver)
 
         mCatalogTypeObserver = Observer {
+            mFragWomenViewModel.reset()
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsWomenView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsWomenView(MainViewModel.CATALOG_TYPE.GRID)
         }
@@ -104,7 +104,7 @@ class FragWomen: Fragment(){
         swipe_women.setProgressViewEndTarget(true, 150)
         swipe_women.setColorSchemeResources(R.color.colorAccent)
         swipe_women.setOnRefreshListener {
-            mFragWomenViewModel.resetPaging()
+            mFragWomenViewModel.reset()
             mProductsWomenDisposable = mFragWomenViewModel.getProductsWomen()
         }
 

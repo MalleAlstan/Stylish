@@ -8,20 +8,16 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
-import com.john.stylish.Stylish
 import com.john.stylish.databinding.FragAccessoriesBinding
 import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
 import com.john.stylish.ui.catalog.CatalogProductsAdapter
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.frag_accessories.*
-import kotlinx.android.synthetic.main.frag_men.*
-import kotlinx.android.synthetic.main.frag_women.*
 
 class FragAccessories: Fragment(){
 
@@ -71,6 +67,7 @@ class FragAccessories: Fragment(){
         mFragAccessoriesViewModel.mAccessoriesList.observe(this, mProductsAccessoriesObserver)
 
         mCatalogTypeObserver = Observer {
+            mFragAccessoriesViewModel.reset()
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.GRID)
         }
@@ -106,7 +103,7 @@ class FragAccessories: Fragment(){
         swipe_accessories.setProgressViewEndTarget(true, 150)
         swipe_accessories.setColorSchemeResources(R.color.colorAccent)
         swipe_accessories.setOnRefreshListener {
-            mFragAccessoriesViewModel.resetPaging()
+            mFragAccessoriesViewModel.reset()
             mProductsAccessoriesDisposable = mFragAccessoriesViewModel.getProductsAccessories()
         }
 

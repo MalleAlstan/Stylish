@@ -22,7 +22,6 @@ class FragDetail : Fragment() {
     private lateinit var mMainViewModel: MainViewModel
     private lateinit var mFragDetailViewModel: FragDetailViewModel
     private lateinit var mFragDetailBinding: FragDetailBinding
-    private lateinit var mProductObserver: Observer<Product>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return setDataBinding(inflater, container)
