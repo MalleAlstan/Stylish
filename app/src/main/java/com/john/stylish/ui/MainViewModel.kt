@@ -13,6 +13,7 @@ class MainViewModel: ViewModel(){
     var fragType = MutableLiveData<FRAG_TYPE>()
     var catalogType = MutableLiveData<CATALOG_TYPE>()
     var detailProduct = MutableLiveData<Product>()
+    var lastFragType = FRAG_TYPE.HOME
 
     init {
         fragType.value = FRAG_TYPE.HOME

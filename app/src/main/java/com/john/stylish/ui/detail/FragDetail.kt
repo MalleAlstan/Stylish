@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.frag_detail.*
 import android.support.v7.widget.PagerSnapHelper
 
 
-class FragDetail : Fragment() {
+class FragDetail : Fragment(), View.OnClickListener {
 
     private lateinit var mMainViewModel: MainViewModel
     private lateinit var mFragDetailViewModel: FragDetailViewModel
@@ -48,7 +48,7 @@ class FragDetail : Fragment() {
         var product = mMainViewModel.detailProduct.value!!
 
         text_detail_title.text = product.title
-        text_detail_price.text = product.price.toString() + "$"
+        text_detail_price.text = "NT$" + product.price.toString()
         text_detail_id.text = product.id.toString()
         text_detail_story.text = product.story
         if (product.sizes.size > 1)text_detail_sizes.text = product.sizes[0] + " - " + product.sizes[product.sizes.size - 1]
@@ -65,7 +65,16 @@ class FragDetail : Fragment() {
 
         recyclerView_detail_colors.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView_detail_colors.adapter = ProductColorsAdapter(product.colors)
+        recyclerView_detail_images.scrollToPosition(1000)
+
+        button_detail_back.setOnClickListener(this)
 
         mFragDetailViewModel.isLoading.value = false
+    }
+
+    override fun onClick(v: View?) {
+        when (v){
+            button_detail_back -> activity!!.onBackPressed()
+        }
     }
 }

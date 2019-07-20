@@ -26,7 +26,6 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     lateinit var mMainViewModel: MainViewModel
     lateinit var mMainBinding: ActivityMainBinding
     lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
-    lateinit var mLastFrag: MainViewModel.FRAG_TYPE
 
     companion object {
         lateinit var mFragHome: FragHome
@@ -96,9 +95,10 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     private fun transFragment(fragType: MainViewModel.FRAG_TYPE?) {
 
-        if (fragType != MainViewModel.FRAG_TYPE.DETAIL)  mLastFrag = mMainViewModel.fragType.value!!
+        if (fragType != MainViewModel.FRAG_TYPE.DETAIL) mMainViewModel.lastFragType = mMainViewModel.fragType.value!!
 
         val transaction = supportFragmentManager.beginTransaction()
+
         when (fragType) {
             MainViewModel.FRAG_TYPE.HOME -> showFragHomeView(transaction)
             MainViewModel.FRAG_TYPE.CATALOG -> showFragCatalogView(transaction)
@@ -158,10 +158,14 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         transaction.commit()
     }
 
-    override fun onBackPressed() {
+    private fun perFormOnBackPressed(){
         if (isDetailInit() && mFragDetail.isAdded) {
             supportFragmentManager.beginTransaction().remove(mFragDetail).commit()
-            mMainViewModel.fragType.value = mLastFrag
+            mMainViewModel.fragType.value = mMainViewModel.lastFragType
         } else super.onBackPressed()
+    }
+
+    override fun onBackPressed() {
+        perFormOnBackPressed()
     }
 }

@@ -57,7 +57,7 @@ class CatalogProductsAdapter(
     private fun bindLinearViewHolder(holder: LinearViewHolder, product: Product) {
         Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
-        holder.textPrice.text = product.price.toString() + "$"
+        holder.textPrice.text = "NT$" + product.price.toString()
         holder.itemView.findViewById<View>(R.id.layout_catalog_linear).setOnClickListener {
             mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
             mMainViewModel.detailProduct.value = product
@@ -67,7 +67,7 @@ class CatalogProductsAdapter(
     private fun bindGridViewHolder(holder: GridViewHolder, product: Product) {
         Glide.with(mContext).load(product.main_image).into(holder.imageMain)
         holder.textTitle.text = product.title
-        holder.textPrice.text = product.price.toString() + "$"
+        holder.textPrice.text = "NT$" + product.price.toString()
         holder.itemView.findViewById<View>(R.id.layout_catalog_grid).setOnClickListener {
             mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
             mMainViewModel.detailProduct.value = product
