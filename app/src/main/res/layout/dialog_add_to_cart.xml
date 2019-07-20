@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+                name="FragDetailViewModel"
+                type="com.john.stylish.ui.detail.FragDetailViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/layout_add_to_cart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_dialog"
+                app:layout_constraintBottom_toTopOf="@id/constraint_add_to_cart_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:letterSpacing="0.15"
+                    android:maxLines="2"
+                    android:textColor="@color/black_3f3a3a"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Uniqlo 超輕羽絨外套"/>
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:letterSpacing="0.15"
+                    android:maxLines="2"
+                    android:textColor="@color/black_3f3a3a"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_add_to_cart_title"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_title"
+                    android:text="NT$9527"/>
+
+            <View
+                    android:id="@+id/view_add_to_cart_top_separation"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_price"/>
+
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_select_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:letterSpacing="0.15"
+                    android:text="選擇顏色"
+                    android:textColor="@color/gray_888888"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_add_to_cart_top_separation"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_add_to_cart_select_color"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_color">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_select_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:letterSpacing="0.15"
+                    android:text="選擇大小"
+                    android:textColor="@color/gray_888888"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_add_to_cart_select_color"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_add_to_cart_select_size"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_size">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_select_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:letterSpacing="0.15"
+                    android:text="選擇數量"
+                    android:textColor="@color/gray_888888"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_add_to_cart_select_size"/>
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_current_stock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:letterSpacing="0.15"
+                    android:textColor="@color/gray_888888"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_add_to_cart_select_size"/>
+
+            <TextView
+                    android:id="@+id/text_add_to_cart_stock_not_enough"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:letterSpacing="0.15"
+                    android:text="庫存不足"
+                    android:textColor="@color/red_d0021b"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_add_to_cart_amount_editor"/>
+
+            <ImageButton
+                    android:id="@+id/button_add_to_cart_remove"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_sub"
+                    android:background="@drawable/bg_frame"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_amount"/>
+
+            <ImageButton
+                    android:id="@+id/button_add_to_cart_add"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_add"
+                    android:background="@drawable/bg_frame"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_amount"/>
+
+            <EditText
+                    android:id="@+id/edit_add_to_cart_amount_editor"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="47dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="47dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_frame"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:letterSpacing="0.15"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="0"
+                    android:textColor="@color/black_3f3a3a"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/button_add_to_cart_add"
+                    app:layout_constraintStart_toStartOf="@+id/button_add_to_cart_remove"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_amount"/>
+
+            <ImageButton
+                    android:id="@+id/button_add_to_cart_close"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/button_dialog_close_ripple"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraint_add_to_cart_bottom"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:background="@color/white_fafafa"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                    android:id="@+id/view_add2cart_bottom_separation"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
+                    android:id="@+id/button_add_to_cart_add_to_cart"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/gray_999999"
+                    android:clickable="false"
+                    android:letterSpacing="0.15"
+                    android:text="加入購物車"
+                    android:textColor="@color/white_fafafa"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

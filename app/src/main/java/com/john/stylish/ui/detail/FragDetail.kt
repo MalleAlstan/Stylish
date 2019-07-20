@@ -1,6 +1,5 @@
 package com.john.stylish.ui.detail
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -9,12 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.john.stylish.R
 import com.john.stylish.databinding.FragDetailBinding
-import com.john.stylish.model.objects.Product.Product
 import com.john.stylish.ui.MainViewModel
 import kotlinx.android.synthetic.main.frag_detail.*
 import android.support.v7.widget.PagerSnapHelper
+import com.john.stylish.R
 
 
 class FragDetail : Fragment(), View.OnClickListener {
@@ -68,6 +66,7 @@ class FragDetail : Fragment(), View.OnClickListener {
         recyclerView_detail_images.scrollToPosition(1000)
 
         button_detail_back.setOnClickListener(this)
+        button_add_to_cart_detail.setOnClickListener(this)
 
         mFragDetailViewModel.isLoading.value = false
     }
@@ -75,6 +74,13 @@ class FragDetail : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v){
             button_detail_back -> activity!!.onBackPressed()
+            button_add_to_cart_detail -> showBottomSheetDialog()
         }
     }
+
+    private fun showBottomSheetDialog (){
+        val addPhotoBottomDialogFragment = AddToCartDialog.newInstance()
+        addPhotoBottomDialogFragment.show(activity!!.getSupportFragmentManager(), AddToCartDialog::class.java!!.getSimpleName())
+    }
+
 }

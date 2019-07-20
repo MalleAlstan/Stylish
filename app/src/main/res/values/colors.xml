@@ -11,5 +11,10 @@
     <color name="gray_cccccc">#cccccc</color>
     <color name="gray_888888">#888888</color>
     <color name="gray_999999">#999999</color>
+    <color name="gray_646464">#646464</color>
     <color name="blue_e6ffff">#e6ffff</color>
+    <color name="red_d0021b">#d0021b</color>
+
+    <color name="purple_voyage">#7830b8</color>
+    <color name="blue_voyage">#33a4cc</color>
 </resources>

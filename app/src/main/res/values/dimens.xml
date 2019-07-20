@@ -4,4 +4,5 @@
     <dimen name="ic_basic_width">24dp</dimen>
     <dimen name="ic_basic_height">24dp</dimen>
     <dimen name="pull_to_refresh_dist">100</dimen>
+
 </resources>
