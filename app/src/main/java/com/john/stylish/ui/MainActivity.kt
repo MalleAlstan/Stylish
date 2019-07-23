@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.util.Log
 import android.view.View
@@ -19,13 +18,16 @@ import com.john.stylish.ui.catalog.FragCatalog
 import com.john.stylish.ui.detail.FragDetail
 import com.john.stylish.ui.home.FragHome
 import com.john.stylish.ui.profile.FragProfile
+import com.john.stylish.utils.Constants.KEY_SELECTED_PRODUCT
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     lateinit var mMainViewModel: MainViewModel
     lateinit var mMainBinding: ActivityMainBinding
     lateinit var mFragmentObserver: Observer<MainViewModel.FRAG_TYPE>
+    lateinit var mSelectedProductObserver: Observer<Product>
 
     companion object {
         lateinit var mFragHome: FragHome
@@ -67,6 +69,11 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
             transFragment(newFragType)
         }
         mMainViewModel.fragType.observe(this, mFragmentObserver)
+
+        mSelectedProductObserver = Observer { selectedProduct ->
+            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
+        }
+        mMainViewModel.selectedProduct.observe(this, mSelectedProductObserver)
     }
 
     private fun setOnClickListeners() {
@@ -94,11 +101,8 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
     }
 
     private fun transFragment(fragType: MainViewModel.FRAG_TYPE?) {
-
         if (fragType != MainViewModel.FRAG_TYPE.DETAIL) mMainViewModel.lastFragType = mMainViewModel.fragType.value!!
-
         val transaction = supportFragmentManager.beginTransaction()
-
         when (fragType) {
             MainViewModel.FRAG_TYPE.HOME -> showFragHomeView(transaction)
             MainViewModel.FRAG_TYPE.CATALOG -> showFragCatalogView(transaction)
@@ -110,6 +114,9 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
 
     private fun showFragDetailView(transaction: FragmentTransaction){
         mFragDetail = FragDetail()
+        var bundle = Bundle()
+        bundle.putSerializable(KEY_SELECTED_PRODUCT, mMainViewModel.selectedProduct.value)
+        mFragDetail.arguments = bundle
         transaction.add(R.id.frame_frag_container, mFragDetail)
         transaction.commit()
     }

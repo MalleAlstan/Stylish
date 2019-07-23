@@ -18,4 +18,6 @@
     <string name="add_to_cart">加入購物車</string>
 
     <string name="on_working">施工中...</string>
+
+    <string name="nt_dollar">NT$%1$s</string>
 </resources>

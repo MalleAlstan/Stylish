@@ -9,30 +9,29 @@ import com.john.stylish.utils.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.rxkotlin.toObservable
 import java.util.ArrayList
 
 class FragWomenViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
-    var mWomenList = MutableLiveData<ArrayList<Product>>()
-    var mNextPage = 0
+    var womenList = MutableLiveData<ArrayList<Product>>()
+    var nextPage = 0
     var hasNexPage = true
 
     init {
         isLoading.value = false
-        mWomenList.value = ArrayList()
+        womenList.value = ArrayList()
     }
 
     fun getProductsWomen(): Disposable {
         val disposable = ProductRepository
-            .getProductsWomen(mNextPage.toString())
+            .getProductsWomen(nextPage.toString())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
-                    mWomenList.value = (mWomenList.value!! + it.data) as ArrayList<Product>
+                    womenList.value = (womenList.value!! + it.data) as ArrayList<Product>
                     if (it.paging == 0) hasNexPage = false
-                    if (hasNexPage) mNextPage = it.paging;
+                    if (hasNexPage) nextPage = it.paging;
                 },
                 onError = { Log.d(Constants.TAG, it.toString())},
                 onComplete = { Log.d(Constants.TAG, "Loading ProductWomen ok")}
@@ -41,8 +40,8 @@ class FragWomenViewModel : ViewModel() {
     }
 
     fun reset(){
-        mWomenList.value = ArrayList()
-        mNextPage = 0
+        womenList.value = ArrayList()
+        nextPage = 0
         hasNexPage = true
     }
 }

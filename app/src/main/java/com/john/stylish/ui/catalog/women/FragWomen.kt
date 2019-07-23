@@ -42,7 +42,7 @@ class FragWomen: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        if (mProductsWomenDisposable!= null) mProductsWomenDisposable.dispose()
+        mProductsWomenDisposable.dispose()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -65,7 +65,7 @@ class FragWomen: Fragment(){
             mFragWomenViewModel.isLoading.value = false
             swipe_women.isRefreshing = false
         }
-        mFragWomenViewModel.mWomenList.observe(this, mProductsWomenObserver)
+        mFragWomenViewModel.womenList.observe(this, mProductsWomenObserver)
 
         mCatalogTypeObserver = Observer {
             mFragWomenViewModel.reset()
@@ -87,8 +87,8 @@ class FragWomen: Fragment(){
                 super.onScrolled(recyclerView, dx, dy)
 
                 val visibleItemCount = recyclerView!!.getChildCount()
-                val totalItemCount = recyclerView!!.getLayoutManager()!!.itemCount
-                val firstVisibleItem = (recyclerView!!.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+                val totalItemCount = recyclerView.getLayoutManager()!!.itemCount
+                val firstVisibleItem = (recyclerView.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                 if ( mFragWomenViewModel.hasNexPage &&
                     mFragWomenViewModel.isLoading.value != true &&

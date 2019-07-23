@@ -41,7 +41,7 @@ class FragAccessories: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        if (mProductsAccessoriesDisposable != null) mProductsAccessoriesDisposable.dispose()
+        mProductsAccessoriesDisposable.dispose()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -64,7 +64,7 @@ class FragAccessories: Fragment(){
             mFragAccessoriesViewModel.isLoading.value = false
             swipe_accessories.isRefreshing = false
         }
-        mFragAccessoriesViewModel.mAccessoriesList.observe(this, mProductsAccessoriesObserver)
+        mFragAccessoriesViewModel.accessoriesList.observe(this, mProductsAccessoriesObserver)
 
         mCatalogTypeObserver = Observer {
             mFragAccessoriesViewModel.reset()
@@ -86,8 +86,8 @@ class FragAccessories: Fragment(){
                 super.onScrolled(recyclerView, dx, dy)
 
                 val visibleItemCount = recyclerView!!.getChildCount()
-                val totalItemCount = recyclerView!!.getLayoutManager()!!.itemCount
-                val firstVisibleItem = (recyclerView!!.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+                val totalItemCount = recyclerView.getLayoutManager()!!.itemCount
+                val firstVisibleItem = (recyclerView.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                 if (mFragAccessoriesViewModel.hasNexPage &&
                     mFragAccessoriesViewModel.isLoading.value != true &&

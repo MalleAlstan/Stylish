@@ -1,6 +1,7 @@
 package com.john.stylish.model.objects.Product
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Product(
 
@@ -32,4 +33,4 @@ data class Product(
     val main_image: String,
     @SerializedName("images")
     val images: Array<String>
-)
+) : Serializable

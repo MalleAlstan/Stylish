@@ -11,7 +11,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.john.stylish.R
 import com.john.stylish.ui.MainViewModel
-import com.john.stylish.utils.ImageManager
 
 
 class HotsListAdapter(
@@ -57,8 +56,7 @@ class HotsListAdapter(
         holder.textDescription.text = product.description
 
         holder.itemView.findViewById<View>(R.id.layout_hots_full).setOnClickListener {
-            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            mMainViewModel.detailProduct.value = product
+            mMainViewModel.selectedProduct.value = product
         }
     }
 
@@ -72,8 +70,7 @@ class HotsListAdapter(
         holder.textTitle.text = product.title
         holder.textDescription.text = product.description
         holder.itemView.findViewById<View>(R.id.layout_hots_collage).setOnClickListener {
-            mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
-            mMainViewModel.detailProduct.value = product
+            mMainViewModel.selectedProduct.value = product
         }
     }
 

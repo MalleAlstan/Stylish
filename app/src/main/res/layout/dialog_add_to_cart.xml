@@ -6,8 +6,8 @@
     <data>
         <import type="android.view.View"/>
         <variable
-                name="FragDetailViewModel"
-                type="com.john.stylish.ui.detail.FragDetailViewModel"/>
+                name="AddToCartDialogViewModel"
+                type="com.john.stylish.ui.detail.addToCart.AddToCartDialogViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -36,7 +36,8 @@
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="Uniqlo 超輕羽絨外套"/>
+                    android:text= "@{AddToCartDialogViewModel.selectedProduct.title}"
+                    tools:text = "Uniqlo 超輕羽絨外套"/>
 
             <TextView
                     android:id="@+id/text_add_to_cart_price"
@@ -51,7 +52,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/text_add_to_cart_title"
                     app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_title"
-                    android:text="NT$9527"/>
+                    android:text = "@{@string/nt_dollar(AddToCartDialogViewModel.selectedProduct.price)}"
+                    tools:text="NT$9527"/>
 
             <View
                     android:id="@+id/view_add_to_cart_top_separation"
@@ -128,7 +130,7 @@
                     android:layout_marginTop="32dp"
                     android:letterSpacing="0.15"
                     android:text="選擇數量"
-                    android:textColor="@color/gray_888888"
+                    android:textColor="@{safeUnbox(AddToCartDialogViewModel.isStockEnough())? @color/gray_888888 : @color/red_d0021b}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_add_to_cart_select_size"/>
@@ -139,10 +141,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
-                    android:letterSpacing="0.15"
-                    android:textColor="@color/gray_888888"
+                    android:textColor="@{safeUnbox(AddToCartDialogViewModel.isStockEnough())? @color/gray_888888 : @color/red_d0021b}"
                     android:textSize="14sp"
-                    android:visibility="gone"
+                    android:text = "@{String.valueOf(AddToCartDialogViewModel.selectedProduct.variants[0].stock)}"
+                    android:visibility="@{safeUnbox(AddToCartDialogViewModel.isNeedShowStock())? View.VISIBLE: View.GONE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_add_to_cart_select_size"/>
 
@@ -156,7 +158,7 @@
                     android:text="庫存不足"
                     android:textColor="@color/red_d0021b"
                     android:textSize="14sp"
-                    android:visibility="gone"
+                    android:visibility="@{safeUnbox(AddToCartDialogViewModel.isStockEnough())? View.GONE : View.VISIBLE}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edit_add_to_cart_amount_editor"/>
 
@@ -166,8 +168,8 @@
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_sub"
-                    android:background="@drawable/bg_frame"
+                    android:src="@{safeUnbox(AddToCartDialogViewModel.isRemovable)? @drawable/ic_remove_black: @drawable/ic_remove_gray}"
+                    android:background="@{safeUnbox(AddToCartDialogViewModel.isRemovable)? @drawable/bg_frame_black: @drawable/bg_frame_gray}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_amount"/>
 
@@ -177,8 +179,8 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_add"
-                    android:background="@drawable/bg_frame"
+                    android:src="@{safeUnbox(AddToCartDialogViewModel.isAddable)? @drawable/ic_add_black: @drawable/ic_add_gray}"
+                    android:background="@{safeUnbox(AddToCartDialogViewModel.isAddable)? @drawable/bg_frame_black: @drawable/bg_frame_gray}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_add_to_cart_select_amount"/>
 
@@ -190,15 +192,15 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="47dp"
                     android:layout_marginBottom="32dp"
-                    android:background="@drawable/bg_frame"
+                    android:background="@drawable/bg_frame_black"
                     android:gravity="center"
                     android:inputType="number"
                     android:letterSpacing="0.15"
                     android:maxLines="1"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="0"
-                    android:textColor="@color/black_3f3a3a"
+                    android:text="@{String.valueOf(AddToCartDialogViewModel.amount)}"
+                    android:textColor="@{safeUnbox(AddToCartDialogViewModel.isStockEnough())? @color/black_3f3a3a : @color/red_d0021b}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/button_add_to_cart_add"
@@ -227,7 +229,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
             <View
-                    android:id="@+id/view_add2cart_bottom_separation"
+                    android:id="@+id/view_add_to_cart_bottom_separation"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginStart="16dp"
@@ -246,8 +248,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@color/gray_999999"
-                    android:clickable="false"
+                    android:background="@{safeUnbox(AddToCartDialogViewModel.isAmountAvailable)? @color/black_3f3a3a : @color/gray_999999}"
+                    android:clickable="@{safeUnbox(AddToCartDialogViewModel.isAmountAvailable)? true : false}"
                     android:letterSpacing="0.15"
                     android:text="加入購物車"
                     android:textColor="@color/white_fafafa"

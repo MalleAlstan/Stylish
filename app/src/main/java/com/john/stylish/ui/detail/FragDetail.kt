@@ -9,15 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.databinding.FragDetailBinding
-import com.john.stylish.ui.MainViewModel
 import kotlinx.android.synthetic.main.frag_detail.*
 import android.support.v7.widget.PagerSnapHelper
 import com.john.stylish.R
+import com.john.stylish.model.objects.Product.Product
+import com.john.stylish.ui.MainActivity
+import com.john.stylish.ui.detail.addToCart.AddToCartDialog
+import com.john.stylish.utils.Constants
+import com.john.stylish.utils.Constants.KEY_SELECTED_PRODUCT
 
 
 class FragDetail : Fragment(), View.OnClickListener {
 
-    private lateinit var mMainViewModel: MainViewModel
     private lateinit var mFragDetailViewModel: FragDetailViewModel
     private lateinit var mFragDetailBinding: FragDetailBinding
 
@@ -32,30 +35,18 @@ class FragDetail : Fragment(), View.OnClickListener {
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         mFragDetailViewModel = ViewModelProviders.of(this).get(FragDetailViewModel::class.java)
+        mFragDetailViewModel.selectedProduct.value = arguments?.getSerializable(KEY_SELECTED_PRODUCT) as Product;
         mFragDetailBinding = DataBindingUtil.inflate(inflater, R.layout.frag_detail, container, false)
         mFragDetailBinding.fragDetailViewModel = mFragDetailViewModel
-        mFragDetailBinding.setLifecycleOwner(activity)
+        mFragDetailBinding.setLifecycleOwner(this)
         return mFragDetailBinding.root
     }
 
     private fun showProductDetailView() {
         mFragDetailViewModel.isLoading.value = true
 
-        var product = mMainViewModel.detailProduct.value!!
-
-        text_detail_title.text = product.title
-        text_detail_price.text = "NT$" + product.price.toString()
-        text_detail_id.text = product.id.toString()
-        text_detail_story.text = product.story
-        if (product.sizes.size > 1)text_detail_sizes.text = product.sizes[0] + " - " + product.sizes[product.sizes.size - 1]
-        else text_detail_sizes.text = product.sizes[0]
-        text_detail_variants.text = product.variants.size.toString()
-        text_detail_texture.text = product.texture
-        text_detail_wash.text = product.wash
-        text_detail_place.text = product.place
-        text_detail_note.text = product.note
+        var product = mFragDetailViewModel.selectedProduct.value!!
 
         recyclerView_detail_images.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView_detail_images.adapter = ProductImagesAdapter(activity!!, product.images)
@@ -79,8 +70,11 @@ class FragDetail : Fragment(), View.OnClickListener {
     }
 
     private fun showBottomSheetDialog (){
-        val addPhotoBottomDialogFragment = AddToCartDialog.newInstance()
-        addPhotoBottomDialogFragment.show(activity!!.getSupportFragmentManager(), AddToCartDialog::class.java!!.getSimpleName())
+        val addToCartDialog = AddToCartDialog.newInstance()
+        var bundle = Bundle()
+        bundle.putSerializable(KEY_SELECTED_PRODUCT, mFragDetailViewModel.selectedProduct.value)
+        addToCartDialog.arguments = bundle
+        addToCartDialog.show(activity!!.getSupportFragmentManager(), AddToCartDialog::class.java.getSimpleName())
     }
 
 }

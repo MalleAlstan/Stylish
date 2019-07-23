@@ -49,11 +49,12 @@
                             android:textSize="18sp"
                             android:textColor="@color/black_3f3a3a"
                             android:letterSpacing="0.15"
-                            tools:text="厚實毛呢格子外套"
+                            android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.title)}"
                             android:layout_marginStart="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:text="厚實毛呢格子外套"/>
 
                     <TextView
                             android:id="@+id/text_detail_price"
@@ -63,11 +64,12 @@
                             android:textColor="@color/black_3f3a3a"
                             android:letterSpacing="0.15"
                             android:gravity="end"
-                            tools:text="NT$2140"
+                            android:text = "@{@string/nt_dollar(FragDetailViewModel.selectedProduct.price)}"
                             android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tools:text="NT$2140"/>
 
                 </android.support.constraint.ConstraintLayout>
 
@@ -80,6 +82,7 @@
                         android:letterSpacing="0.15"
                         android:paddingTop="4dp"
                         android:paddingStart="16dp"
+                        android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.id)}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,6 +99,7 @@
                         android:paddingTop="24dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
+                        android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.story)}"
                         tools:text="採用高級100%棉質素材的外套。輕盈保暖高質感的針織大衣！精緻做工升級，展現高質感氛圍。"/>
 
                 <LinearLayout
@@ -160,6 +164,7 @@
                             android:textSize="16sp"
                             android:textColor="#3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{FragDetailViewModel.sizeString}"
                             tools:text="XS - L"/>
                 </LinearLayout>
 
@@ -192,8 +197,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="#3f3a3a"
+                            android:textColor="@color/black_3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{FragDetailViewModel.variantString}"
                             tools:text="24"/>
                 </LinearLayout>
 
@@ -226,8 +232,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="#3f3a3a"
+                            android:textColor="@color/black_3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.texture)}"
                             tools:text="棉、聚脂纖維"/>
                 </LinearLayout>
 
@@ -260,8 +267,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:textColor="#3f3a3a"
+                            android:textColor="@color/black_3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.wash)}"
                             tools:text="手洗（水溫40度）"/>
                 </LinearLayout>
 
@@ -296,6 +304,7 @@
                             android:textSize="16sp"
                             android:textColor="#3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.place)}"
                             tools:text="韓國"/>
                 </LinearLayout>
 
@@ -331,6 +340,7 @@
                             android:textSize="16sp"
                             android:textColor="#3f3a3a"
                             android:letterSpacing="0.15"
+                            android:text="@{String.valueOf(FragDetailViewModel.selectedProduct.note)}"
                             tools:text="實品顏色以單品照為主"/>
                 </LinearLayout>
             </LinearLayout>
@@ -369,7 +379,7 @@
         <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{FragDetailViewModel.isLoading()? View.VISIBLE: View.GONE}"
+                android:visibility="@{safeUnbox(FragDetailViewModel.isLoading())? View.VISIBLE: View.GONE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

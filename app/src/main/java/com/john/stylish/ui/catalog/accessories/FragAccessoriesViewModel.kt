@@ -9,30 +9,29 @@ import com.john.stylish.utils.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.rxkotlin.toObservable
 import java.util.ArrayList
 
 class FragAccessoriesViewModel : ViewModel() {
 
     var isLoading = MutableLiveData<Boolean>()
-    var mAccessoriesList= MutableLiveData<ArrayList<Product>>() //MutableLiveData<ArrayList<Any>>()
-    var mNextPage = 0
+    var accessoriesList= MutableLiveData<ArrayList<Product>>() //MutableLiveData<ArrayList<Any>>()
+    var nextPage = 0
     var hasNexPage = true
 
     init {
         isLoading.value = false
-        mAccessoriesList.value = ArrayList()
+        accessoriesList.value = ArrayList()
     }
 
     fun getProductsAccessories(): Disposable {
         val disposable = ProductRepository
-            .getProductsAccessories(mNextPage.toString())
+            .getProductsAccessories(nextPage.toString())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onNext = {
-                    mAccessoriesList.value = (mAccessoriesList.value!! + it.data) as ArrayList<Product>
+                    accessoriesList.value = (accessoriesList.value!! + it.data) as ArrayList<Product>
                     if (it.paging == 0) hasNexPage = false
-                    if (hasNexPage) mNextPage = it.paging;
+                    if (hasNexPage) nextPage = it.paging;
                 },
                 onError = { Log.d(Constants.TAG, it.toString())},
                 onComplete = { Log.d(Constants.TAG, "Loading ProductAccessories ok")}
@@ -41,8 +40,8 @@ class FragAccessoriesViewModel : ViewModel() {
     }
 
     fun reset(){
-        mAccessoriesList.value = ArrayList()
-        mNextPage = 0
+        accessoriesList.value = ArrayList()
+        nextPage = 0
         hasNexPage = true
     }
 }

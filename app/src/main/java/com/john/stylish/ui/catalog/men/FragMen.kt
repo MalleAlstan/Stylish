@@ -42,7 +42,7 @@ class FragMen: Fragment(){
 
     override fun onPause() {
         super.onPause()
-        if (mProductsMenDisposable != null )mProductsMenDisposable.dispose()
+        mProductsMenDisposable.dispose()
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -65,7 +65,7 @@ class FragMen: Fragment(){
             mFragMenViewModel.isLoading.value = false
             swipe_men.isRefreshing = false
         }
-        mFragMenViewModel.mMenList.observe(this, mProductsMenObserver)
+        mFragMenViewModel.menList.observe(this, mProductsMenObserver)
 
         mCatalogTypeObserver = Observer {
             mFragMenViewModel.reset()
@@ -86,8 +86,8 @@ class FragMen: Fragment(){
                 super.onScrolled(recyclerView, dx, dy)
 
                 val visibleItemCount = recyclerView!!.getChildCount()
-                val totalItemCount = recyclerView!!.getLayoutManager()!!.itemCount
-                val firstVisibleItem = (recyclerView!!.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+                val totalItemCount = recyclerView.getLayoutManager()!!.itemCount
+                val firstVisibleItem = (recyclerView.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                 if (mFragMenViewModel.hasNexPage &&
                     mFragMenViewModel.isLoading.value != true &&

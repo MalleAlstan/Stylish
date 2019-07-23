@@ -2,9 +2,12 @@ package com.john.stylish.ui
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.google.gson.annotations.SerializedName
 import com.john.stylish.R
 import com.john.stylish.Stylish
+import com.john.stylish.model.objects.Product.Color
 import com.john.stylish.model.objects.Product.Product
+import com.john.stylish.model.objects.Product.Variant
 import com.john.stylish.utils.Constants.APP_NAME
 
 
@@ -12,8 +15,8 @@ class MainViewModel: ViewModel(){
 
     var fragType = MutableLiveData<FRAG_TYPE>()
     var catalogType = MutableLiveData<CATALOG_TYPE>()
-    var detailProduct = MutableLiveData<Product>()
     var lastFragType = FRAG_TYPE.HOME
+    var selectedProduct = MutableLiveData<Product>()
 
     init {
         fragType.value = FRAG_TYPE.HOME
