@@ -1,6 +1,7 @@
 package com.john.stylish.model.objects.Product
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Variant(
 
@@ -10,4 +11,4 @@ data class Variant(
     val size: String,
     @SerializedName("stock")
     val stock: Int
-)
+): Serializable

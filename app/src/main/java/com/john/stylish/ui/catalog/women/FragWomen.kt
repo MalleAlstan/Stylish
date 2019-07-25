@@ -65,13 +65,13 @@ class FragWomen: Fragment(){
             mFragWomenViewModel.isLoading.value = false
             swipe_women.isRefreshing = false
         }
-        mFragWomenViewModel.womenList.observe(this, mProductsWomenObserver)
-
         mCatalogTypeObserver = Observer {
             mFragWomenViewModel.reset()
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsWomenView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsWomenView(MainViewModel.CATALOG_TYPE.GRID)
         }
+
+        mFragWomenViewModel.womenList.observe(this, mProductsWomenObserver)
         mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }
 

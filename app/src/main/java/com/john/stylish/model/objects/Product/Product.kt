@@ -32,5 +32,7 @@ data class Product(
     @SerializedName("main_image")
     val main_image: String,
     @SerializedName("images")
-    val images: Array<String>
+    val images: Array<String>,
+
+    val count: Int
 ) : Serializable

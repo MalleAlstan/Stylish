@@ -37,6 +37,7 @@ class MainViewModel: ViewModel(){
                 CATALOG -> title = Stylish.getAppContext().getString(R.string.catalog)
                 CART -> title = Stylish.getAppContext().getString(R.string.cart)
                 PROFILE -> title = Stylish.getAppContext().getString(R.string.profile)
+                else -> title = APP_NAME
             }
             return title
         }

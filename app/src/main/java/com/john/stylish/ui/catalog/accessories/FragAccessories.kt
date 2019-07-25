@@ -60,17 +60,16 @@ class FragAccessories: Fragment(){
                 mProductsWomenAdapter = CatalogProductsAdapter(it!!, activity!!, mMainViewModel)
                 recyclerView_products_accessories.adapter = mProductsWomenAdapter
             } else mProductsWomenAdapter.updateData(it!!)
-
             mFragAccessoriesViewModel.isLoading.value = false
             swipe_accessories.isRefreshing = false
         }
-        mFragAccessoriesViewModel.accessoriesList.observe(this, mProductsAccessoriesObserver)
-
         mCatalogTypeObserver = Observer {
             mFragAccessoriesViewModel.reset()
             if (it == MainViewModel.CATALOG_TYPE.LINEAR) showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.LINEAR)
             else showProductsAccessoriesView(MainViewModel.CATALOG_TYPE.GRID)
         }
+
+        mFragAccessoriesViewModel.accessoriesList.observe(this, mProductsAccessoriesObserver)
         mMainViewModel.catalogType.observe(this, mCatalogTypeObserver)
     }
 

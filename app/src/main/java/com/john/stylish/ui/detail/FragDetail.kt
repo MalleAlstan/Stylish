@@ -13,9 +13,7 @@ import kotlinx.android.synthetic.main.frag_detail.*
 import android.support.v7.widget.PagerSnapHelper
 import com.john.stylish.R
 import com.john.stylish.model.objects.Product.Product
-import com.john.stylish.ui.MainActivity
 import com.john.stylish.ui.detail.addToCart.AddToCartDialog
-import com.john.stylish.utils.Constants
 import com.john.stylish.utils.Constants.KEY_SELECTED_PRODUCT
 
 
@@ -23,6 +21,7 @@ class FragDetail : Fragment(), View.OnClickListener {
 
     private lateinit var mFragDetailViewModel: FragDetailViewModel
     private lateinit var mFragDetailBinding: FragDetailBinding
+    private var isShowingBottomSheet = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return setDataBinding(inflater, container)
@@ -50,11 +49,11 @@ class FragDetail : Fragment(), View.OnClickListener {
 
         recyclerView_detail_images.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView_detail_images.adapter = ProductImagesAdapter(activity!!, product.images)
+        recyclerView_detail_images.scrollToPosition(1000)
         PagerSnapHelper().attachToRecyclerView(recyclerView_detail_images)
 
         recyclerView_detail_colors.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         recyclerView_detail_colors.adapter = ProductColorsAdapter(product.colors)
-        recyclerView_detail_images.scrollToPosition(1000)
 
         button_detail_back.setOnClickListener(this)
         button_add_to_cart_detail.setOnClickListener(this)
@@ -70,11 +69,11 @@ class FragDetail : Fragment(), View.OnClickListener {
     }
 
     private fun showBottomSheetDialog (){
+        isShowingBottomSheet = true
         val addToCartDialog = AddToCartDialog.newInstance()
         var bundle = Bundle()
         bundle.putSerializable(KEY_SELECTED_PRODUCT, mFragDetailViewModel.selectedProduct.value)
         addToCartDialog.arguments = bundle
         addToCartDialog.show(activity!!.getSupportFragmentManager(), AddToCartDialog::class.java.getSimpleName())
     }
-
 }

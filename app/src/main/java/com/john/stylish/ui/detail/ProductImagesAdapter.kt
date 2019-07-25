@@ -14,7 +14,7 @@ class ProductImagesAdapter(val mContext: Context, val mImages: Array<String>)
     : RecyclerView.Adapter<ProductImagesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_detail_images, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_detail_images, parent, false)
         return ViewHolder(view)
     }
 

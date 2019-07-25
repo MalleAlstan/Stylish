@@ -41,11 +41,6 @@ class FragHome: Fragment(){
         showHotListsView()
     }
 
-    override fun onPause() {
-        super.onPause()
-        if (mHotsListDisposable != null) mHotsListDisposable.dispose()
-    }
-
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
         mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         mFragHomeViewModel = ViewModelProviders.of(this).get(FragHomeViewModel::class.java)

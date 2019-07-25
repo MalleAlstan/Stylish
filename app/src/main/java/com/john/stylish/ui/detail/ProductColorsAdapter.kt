@@ -1,7 +1,6 @@
 package com.john.stylish.ui.detail
 
 import com.john.stylish.model.objects.Product.Color
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,7 @@ class ProductColorsAdapter(val mColors: Array<Color>)
     : RecyclerView.Adapter<ProductColorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_detail_colors, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_detail_colors, parent, false)
         return ViewHolder(view)
     }
 

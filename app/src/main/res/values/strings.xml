@@ -20,4 +20,9 @@
     <string name="on_working">施工中...</string>
 
     <string name="nt_dollar">NT$%1$s</string>
+    
+    <string name="choose_color">選擇顏色</string>
+    <string name="choose_size">選擇大小</string>
+    <string name="choose_amount">選擇數量</string>
+    <string name="stock_not_enough">庫存不足</string>
 </resources>

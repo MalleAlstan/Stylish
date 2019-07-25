@@ -68,11 +68,11 @@ class MainActivity : BaseActivity(), BaseInit, OnClickListener {
         mFragmentObserver = Observer { newFragType ->
             transFragment(newFragType)
         }
-        mMainViewModel.fragType.observe(this, mFragmentObserver)
-
-        mSelectedProductObserver = Observer { selectedProduct ->
+        mSelectedProductObserver = Observer {
             mMainViewModel.fragType.value = MainViewModel.FRAG_TYPE.DETAIL
         }
+
+        mMainViewModel.fragType.observe(this, mFragmentObserver)
         mMainViewModel.selectedProduct.observe(this, mSelectedProductObserver)
     }
 

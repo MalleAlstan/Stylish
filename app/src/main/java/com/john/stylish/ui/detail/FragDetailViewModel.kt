@@ -27,10 +27,6 @@ class FragDetailViewModel : ViewModel() {
         var totalStock = 0
         for (model in selectedProduct.value!!.variants) totalStock += model.stock
 
-        for (variant in selectedProduct.value!!.variants){
-            Log.d("123456", variant.color_code + " - " + variant.size + " - " + variant.stock)
-        }
-
         return totalStock.toString()
     }
 }
