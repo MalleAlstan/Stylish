@@ -25,4 +25,6 @@
     <string name="choose_size">選擇大小</string>
     <string name="choose_amount">選擇數量</string>
     <string name="stock_not_enough">庫存不足</string>
+
+    <string name="cant_get_product_list">無法取得商品列表</string>
 </resources>

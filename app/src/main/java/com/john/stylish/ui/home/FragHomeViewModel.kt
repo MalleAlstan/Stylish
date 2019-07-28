@@ -22,8 +22,8 @@ class FragHomeViewModel : ViewModel() {
         isLoading.value = false
     }
 
-    fun getHotsList(): Disposable{
-        val disposable = ProductRepository
+    fun getHotsList() {
+        ProductRepository
             .getHotsProductList()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -31,7 +31,6 @@ class FragHomeViewModel : ViewModel() {
                 onError = { Log.d(TAG, it.toString())},
                 onComplete = { Log.d(TAG, "Loading HotList ok")}
             )
-        return disposable
     }
 
     private fun setHotsList(hotsResponse: HotsResponse){

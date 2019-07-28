@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.john.stylish.R
 
 
-class ProductImagesAdapter(val mContext: Context, val mImages: Array<String>)
+class ProductImagesAdapter(val mContext: Context, val mImages: ArrayList<String>)
     : RecyclerView.Adapter<ProductImagesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

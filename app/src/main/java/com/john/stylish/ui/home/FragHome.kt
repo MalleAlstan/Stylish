@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.john.stylish.R
 import com.john.stylish.Stylish
+import com.john.stylish.base.BaseFragment
 import com.john.stylish.databinding.FragHomeBinding
 import com.john.stylish.ui.MainViewModel
 import com.john.stylish.ui.catalog.CatalogProductsAdapter
@@ -21,12 +22,10 @@ import kotlinx.android.synthetic.main.frag_home.*
 import kotlinx.android.synthetic.main.frag_women.*
 import kotlin.math.roundToInt
 
-class FragHome: Fragment(){
+class FragHome: BaseFragment(){
 
-    lateinit var mMainViewModel: MainViewModel
     lateinit var mFragHomeViewModel: FragHomeViewModel
     lateinit var mFragHomeBinding: FragHomeBinding
-    lateinit var mHotsListDisposable: Disposable
     lateinit var mHotsListObserver: Observer<ArrayList<Any>>
     lateinit var mHotsListAdapter: HotsListAdapter
 
@@ -42,7 +41,6 @@ class FragHome: Fragment(){
     }
 
     private fun setDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        mMainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         mFragHomeViewModel = ViewModelProviders.of(this).get(FragHomeViewModel::class.java)
         mFragHomeBinding = DataBindingUtil.inflate(inflater, R.layout.frag_home, container , false)
         mFragHomeBinding.fragHomeViewModel = mFragHomeViewModel
@@ -67,13 +65,13 @@ class FragHome: Fragment(){
     private fun showHotListsView(){
         mFragHomeViewModel.isLoading.value = true
         recyclerView_hot_list.layoutManager = LinearLayoutManager(context)
-        mHotsListDisposable = mFragHomeViewModel.getHotsList()
+        mFragHomeViewModel.getHotsList()
 
         swipe_home.setDistanceToTriggerSync(250)
         swipe_home.setProgressViewEndTarget(true, 150)
         swipe_home.setColorSchemeResources(R.color.colorAccent)
         swipe_home.setOnRefreshListener {
-            mHotsListDisposable = mFragHomeViewModel.getHotsList()
+            mFragHomeViewModel.getHotsList()
         }
     }
 }

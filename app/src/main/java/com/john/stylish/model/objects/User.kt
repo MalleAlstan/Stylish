@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 data class User(
 
     @SerializedName("id")
-    val id: Long,
+    val id: Long = 0,
     @SerializedName("id")
-    val provider: String,
+    val provider: String = "",
     @SerializedName("id")
-    val name: String,
+    val name: String = "",
     @SerializedName("id")
-    val email: String,
+    val email: String = "",
     @SerializedName("id")
-    val picture: String
+    val picture: String =""
 )

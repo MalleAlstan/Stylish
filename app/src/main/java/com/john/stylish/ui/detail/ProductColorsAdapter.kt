@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.john.stylish.R
 
 
-class ProductColorsAdapter(val mColors: Array<Color>)
+class ProductColorsAdapter(val mColors: ArrayList<Color>)
     : RecyclerView.Adapter<ProductColorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -12,6 +12,8 @@ import io.reactivex.schedulers.Schedulers
 
 object ProductRepository {
 
+
+
     fun getHotsProductList(): Observable<HotsResponse> {
 
         val getHotsListCall = ApiServiceBuilder.build().getMarketingHots()

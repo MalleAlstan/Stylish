@@ -15,7 +15,7 @@ import com.john.stylish.Stylish
 
 class AddToCartSizesAdapter(
     val mFragment: AddToCartDialog,
-    val mSizes: Array<String>,
+    val mSizes: ArrayList<String>,
     val mViewModel: AddToCartDialogViewModel
 ) : RecyclerView.Adapter<AddToCartSizesAdapter.ViewHolder>() {
 

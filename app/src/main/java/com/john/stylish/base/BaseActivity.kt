@@ -1,14 +1,10 @@
 package com.john.stylish.base
 
 import android.graphics.Color
-import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 open class BaseActivity : AppCompatActivity() {
 

@@ -6,33 +6,33 @@ import java.io.Serializable
 data class Product(
 
     @SerializedName("id")
-    val id: Long,
+    val id: Long = 0,
     @SerializedName("title")
-    val title: String,
+    val title: String = "",
     @SerializedName("description")
-    val description: String,
+    val description: String = "",
     @SerializedName("price")
-    val price: Int,
+    val price: Int = 0,
     @SerializedName("texture")
-    val texture: String,
+    val texture: String = "",
     @SerializedName("wash")
-    val wash: String,
+    val wash: String = "",
     @SerializedName("place")
-    val place: String,
+    val place: String = "",
     @SerializedName("note")
-    val note: String,
+    val note: String = "",
     @SerializedName("story")
-    val story: String,
+    val story: String = "",
     @SerializedName("colors")
-    val colors: Array<Color>,
+    val colors: ArrayList<Color> = ArrayList(),
     @SerializedName("sizes")
-    val sizes: Array<String>,
+    val sizes: ArrayList<String> = ArrayList(),
     @SerializedName("variants")
-    val variants: Array<Variant>,
+    val variants: ArrayList<Variant> = ArrayList(),
     @SerializedName("main_image")
-    val main_image: String,
+    val main_image: String = "",
     @SerializedName("images")
-    val images: Array<String>,
+    val images: ArrayList<String> = ArrayList(),
 
-    val count: Int
+    val count: Int = 0
 ) : Serializable

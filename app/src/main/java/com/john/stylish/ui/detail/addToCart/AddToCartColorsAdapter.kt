@@ -16,7 +16,7 @@ import com.john.stylish.ui.detail.addToCart.AddToCartDialogViewModel
 import kotlinx.android.synthetic.main.frag_men.*
 
 
-class AddToCartColorsAdapter(val mColors: Array<Color>, val mViewModel: AddToCartDialogViewModel)
+class AddToCartColorsAdapter(val mColors: ArrayList<Color>, val mViewModel: AddToCartDialogViewModel)
     : RecyclerView.Adapter<AddToCartColorsAdapter.ViewHolder>() {
 
     var mSelectedColor = ""
